@@ -12,6 +12,24 @@
     "slideshow_EBbzFb": {
       "type": "slideshow",
       "blocks": {
+        "slide_WHYQtk": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/pexels-pavel-danilyuk-8421909.jpg",
+            "image_overlay_opacity": 30,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
         "slide_mVyVib": {
           "type": "slide",
           "settings": {
@@ -68,6 +86,7 @@
         }
       },
       "block_order": [
+        "slide_WHYQtk",
         "slide_mVyVib",
         "slide_FLkhyN",
         "slide_49CNwf"
