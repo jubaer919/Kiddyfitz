@@ -34,7 +34,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/pexels-shkrabaanthony-6261877.jpg",
-            "image_overlay_opacity": 30,
+            "image_overlay_opacity": 10,
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -70,7 +70,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/pexels-d-ng-thanh-tu-2922122-5693889.jpg",
-            "image_overlay_opacity": 30,
+            "image_overlay_opacity": 10,
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
