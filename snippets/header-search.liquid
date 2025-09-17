@@ -9,9 +9,10 @@
 {% endcomment %}
 
 <details-modal class="header__search">
+  <div class="serch-icon-design">
   <details>
     <summary
-      class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
+      class="search__icon  header__icon--search header__icon--summary link focus-inset modal__toggle search-icon-modify"
       aria-haspopup="dialog"
       aria-label="{{ 'general.search.search' | t }}"
     >
@@ -35,15 +36,30 @@
         class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
         tabindex="-1"
       >
+        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset shop-name">
+          {%- if settings.logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+              {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+              {{
+                settings.logo | image_url: width: 600 | image_tag: class: 'header__heading-logo motion-reduce', widths: widths, height: logo_height, width: settings.logo_width, alt: logo_alt, sizes: sizes, preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
         {%- if settings.predictive_search_enabled -%}
           <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
         {%- else -%}
           <search-form class="search-modal__form">
         {%- endif -%}
         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-          <div class="field">
+          <div class="">
             <input
-              class="search__input field__input"
+              class="search__input field__input custom-design"
               id="{{ input_id }}"
               type="search"
               name="q"
@@ -62,7 +78,6 @@
                 spellcheck="false"
               {%- endif -%}
             >
-            <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
             <input type="hidden" name="options[prefix]" value="last">
             <button
               type="reset"
@@ -79,15 +94,16 @@
               </span>
             </button>
           </div>
-
-          {%- if settings.predictive_search_enabled -%}
-            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
-              {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
-            </div>
-
-            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
-          {%- endif -%}
         </form>
+        
+        {%- if settings.predictive_search_enabled -%}
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+          </div>
+
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+        {%- endif -%}
+
         {%- if settings.predictive_search_enabled -%}
           </predictive-search>
         {%- else -%}
@@ -95,14 +111,15 @@
         {%- endif -%}
         <button
           type="button"
-          class="search-modal__close-button modal__close-button link link--text focus-inset"
+          class="search__close-btn"
           aria-label="{{ 'accessibility.close' | t }}"
         >
           <span class="svg-wrapper">
-            {{- 'icon-close.svg' | inline_asset_content -}}
+            Cancel
           </span>
         </button>
       </div>
     </div>
   </details>
+  </div>
 </details-modal>
