@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/pexels-pavel-danilyuk-8421909.jpg",
-            "image_overlay_opacity": 30,
+            "image_overlay_opacity": 10,
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
