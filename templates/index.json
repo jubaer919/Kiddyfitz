@@ -12,6 +12,24 @@
     "slideshow_EBbzFb": {
       "type": "slideshow",
       "blocks": {
+        "slide_mVyVib": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/pexels-shkrabaanthony-6261877.jpg",
+            "image_overlay_opacity": 30,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
         "slide_FLkhyN": {
           "type": "slide",
           "settings": {
@@ -50,6 +68,7 @@
         }
       },
       "block_order": [
+        "slide_mVyVib",
         "slide_FLkhyN",
         "slide_49CNwf"
       ],
