@@ -12,6 +12,24 @@
     "slideshow_EBbzFb": {
       "type": "slideshow",
       "blocks": {
+        "slide_FLkhyN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/pexels-ron-lach-9511977.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
         "slide_49CNwf": {
           "type": "slide",
           "settings": {
@@ -32,6 +50,7 @@
         }
       },
       "block_order": [
+        "slide_FLkhyN",
         "slide_49CNwf"
       ],
       "name": "t:sections.slideshow.presets.name",
