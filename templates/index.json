@@ -94,6 +94,7 @@
       "name": "t:sections.slideshow.presets.name",
       "settings": {
         "layout": "full_bleed",
+        "show_nav_button": false,
         "slide_height": "medium",
         "slider_visual": "counter",
         "auto_rotate": true,
