@@ -1,3 +1,61 @@
+import Swiper from "swiper";
+import "swiper/css";
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Find all swiper-slideshow sections
+  const swiperSections = document.querySelectorAll('[id^="swiper-slideshow-"]');
+
+  swiperSections.forEach((section) => {
+    const container = section.querySelector(".swiper-container");
+
+    const loop = container.dataset.loop === "true";
+    const autoplayEnabled = container.dataset.autoplay === "true";
+    const slidesPerView = parseInt(container.dataset.slidesperview) || 1;
+    const slidesPerGroup = parseInt(container.dataset.slidespergroup) || 1;
+    const delay = parseInt(container.dataset.delay) || 5000;
+    const showArrows = container.dataset.showArrows === "true";
+    const sliderVisual = container.dataset.sliderVisual;
+
+    const swiper = new Swiper(container, {
+      loop: loop,
+      slidesPerView: slidesPerView,
+      slidesPerGroup: slidesPerGroup,
+      autoplay: autoplayEnabled
+        ? {
+            delay: delay,
+            disableOnInteraction: false,
+          }
+        : false,
+      navigation: showArrows
+        ? {
+            nextEl: section.querySelector(".swiper-button-next"),
+            prevEl: section.querySelector(".swiper-button-prev"),
+          }
+        : false,
+      pagination:
+        sliderVisual === "dots"
+          ? {
+              el: section.querySelector(".swiper-pagination"),
+              clickable: true,
+            }
+          : false,
+      on: {
+        slideChange: function () {
+          if (sliderVisual === "counter" || sliderVisual === "numbers") {
+            const current = section.querySelector(".slider-counter--current");
+            const total = section.querySelector(".slider-counter--total");
+            if (current && total) {
+              current.textContent = this.realIndex + 1;
+              total.textContent =
+                this.slides.length - (loop ? this.loopedSlides * 2 : 0);
+            }
+          }
+        },
+      },
+    });
+  });
+});
+
 function getFocusableElements(container) {
   return Array.from(
     container.querySelectorAll(
@@ -966,163 +1024,164 @@ customElements.define("slider-component", SliderComponent);
 class SlideshowComponent extends SliderComponent {
   constructor() {
     super();
+
+    // config + announcement bar
     this.sliderControlWrapper = this.querySelector(".slider-buttons");
-    this.enableSliderLooping = true;
-
-    if (!this.sliderControlWrapper) return;
-
-    this.sliderFirstItemNode = this.slider.querySelector(".slideshow__slide");
-    if (this.sliderItemsToShow.length > 0) this.currentPage = 1;
-
     this.announcementBarSlider = this.querySelector(".announcement-bar-slider");
-    // Value below should match --duration-announcement-bar CSS value
     this.announcerBarAnimationDelay = this.announcementBarSlider ? 250 : 0;
 
-    this.sliderControlLinksArray = Array.from(
-      this.sliderControlWrapper.querySelectorAll(".slider-counter__link")
+    // gather real slides (before cloning)
+    this._realSlides = Array.from(
+      this.slider.querySelectorAll(".slideshow__slide")
     );
-    this.sliderControlLinksArray.forEach((link) =>
-      link.addEventListener("click", this.linkToSlide.bind(this))
+    this.itemCountReal = this._realSlides.length; // real slides count (N)
+    if (this.itemCountReal === 0) return;
+
+    this.currentPage = 1; // real pages are 1..N
+    this.programmaticAnimating = false; // used to ignore observer during programmatic jumps
+
+    // clone first & last for infinite loop
+    this.cloneSlides();
+
+    // refresh node lists and index references
+    this.sliderItemsArray = Array.from(
+      this.slider.querySelectorAll(".slideshow__slide")
     );
-    this.slider.addEventListener("scroll", this.setSlideVisibility.bind(this));
-    this.setSlideVisibility();
+    this.firstCloneIndex = this.sliderItemsArray.length - 1; // appended first-clone
+    this.lastCloneIndex = 0; // prepended last-clone
 
-    if (this.announcementBarSlider) {
-      this.announcementBarArrowButtonWasClicked = false;
+    // compute slide width (offset) and position to first real slide
+    this.updateItemWidth();
+    requestAnimationFrame(() => {
+      this.slider.scrollTo({
+        left: this.sliderItemOffset * this.currentPage,
+        behavior: "auto",
+      });
+    });
+    window.addEventListener("resize", () => {
+      this.updateItemWidth();
+      // keep the same current page visible after resize
+      this.slider.scrollTo({
+        left: this.sliderItemOffset * this.currentPage,
+        behavior: "auto",
+      });
+    });
 
-      this.reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+    // controls (dots)
+    if (this.sliderControlWrapper) {
+      this.sliderControlLinksArray = Array.from(
+        this.sliderControlWrapper.querySelectorAll(".slider-counter__link")
       );
-      this.reducedMotion.addEventListener("change", () => {
-        if (this.slider.getAttribute("data-autoplay") === "true")
-          this.setAutoPlay();
-      });
-
-      [this.prevButton, this.nextButton].forEach((button) => {
-        button.addEventListener(
-          "click",
-          () => {
-            this.announcementBarArrowButtonWasClicked = true;
-          },
-          { once: true }
-        );
-      });
+      this.sliderControlLinksArray.forEach((link) =>
+        link.addEventListener("click", this.linkToSlide.bind(this))
+      );
     }
 
+    // visibility (accessibility) uses real slides only
+    this.setSlideVisibility();
+
+    // intersection observer to reliably detect visible slide and handle clones
+    this.createObserver();
+
+    // autoplay
     if (this.slider.getAttribute("data-autoplay") === "true")
       this.setAutoPlay();
   }
 
-  setAutoPlay() {
-    this.autoplaySpeed = this.slider.dataset.speed * 1000;
-    this.addEventListener("mouseover", this.focusInHandling.bind(this));
-    this.addEventListener("mouseleave", this.focusOutHandling.bind(this));
-    this.addEventListener("focusin", this.focusInHandling.bind(this));
-    this.addEventListener("focusout", this.focusOutHandling.bind(this));
-
-    if (this.querySelector(".slideshow__autoplay")) {
-      this.sliderAutoplayButton = this.querySelector(".slideshow__autoplay");
-      this.sliderAutoplayButton.addEventListener(
-        "click",
-        this.autoPlayToggle.bind(this)
-      );
-      this.autoplayButtonIsSetToPlay = true;
-      this.play();
-    } else {
-      this.reducedMotion.matches || this.announcementBarArrowButtonWasClicked
-        ? this.pause()
-        : this.play();
-    }
-  }
-
-  onButtonClick(event) {
-    super.onButtonClick(event);
-    this.wasClicked = true;
-
-    const isFirstSlide = this.currentPage === 1;
-    const isLastSlide = this.currentPage === this.sliderItemsToShow.length;
-
-    if (!isFirstSlide && !isLastSlide) {
-      this.applyAnimationToAnnouncementBar(event.currentTarget.name);
-      return;
-    }
-
-    if (isFirstSlide && event.currentTarget.name === "previous") {
-      this.slideScrollPosition =
-        this.slider.scrollLeft +
-        this.sliderFirstItemNode.clientWidth * this.sliderItemsToShow.length;
-    } else if (isLastSlide && event.currentTarget.name === "next") {
-      this.slideScrollPosition = 0;
-    }
-
-    this.setSlidePosition(this.slideScrollPosition);
-
-    this.applyAnimationToAnnouncementBar(event.currentTarget.name);
-  }
-
-  setSlidePosition(position) {
-    if (this.setPositionTimeout) clearTimeout(this.setPositionTimeout);
-    this.setPositionTimeout = setTimeout(() => {
-      this.slider.scrollTo({
-        left: position,
-      });
-    }, this.announcerBarAnimationDelay);
-  }
-
-  update() {
-    super.update();
-    this.sliderControlButtons = this.querySelectorAll(".slider-counter__link");
-    this.prevButton.removeAttribute("disabled");
-
-    if (!this.sliderControlButtons.length) return;
-
-    this.sliderControlButtons.forEach((link) => {
-      link.classList.remove("slider-counter__link--active");
-      link.removeAttribute("aria-current");
-    });
-    this.sliderControlButtons[this.currentPage - 1].classList.add(
-      "slider-counter__link--active"
+  /********** helpers **********/
+  updateItemWidth() {
+    const firstReal = this.slider.querySelector(
+      ".slideshow__slide:not(.clone)"
     );
-    this.sliderControlButtons[this.currentPage - 1].setAttribute(
-      "aria-current",
-      true
+    this.sliderItemOffset = firstReal
+      ? firstReal.getBoundingClientRect().width
+      : 0;
+  }
+
+  cloneSlides() {
+    // preserve original _realSlides gathered earlier
+    const first = this._realSlides[0];
+    const last = this._realSlides[this._realSlides.length - 1];
+
+    const firstClone = first.cloneNode(true);
+    const lastClone = last.cloneNode(true);
+
+    firstClone.classList.add("clone");
+    lastClone.classList.add("clone");
+
+    // append clone of first to the end, prepend clone of last to the start
+    this.slider.appendChild(firstClone);
+    this.slider.insertBefore(lastClone, this.slider.firstChild);
+  }
+
+  createObserver() {
+    // threshold tuned so the slide must be majority visible
+    const options = { root: this.slider, threshold: 0.55 };
+    this.observer = new IntersectionObserver(
+      this.onIntersect.bind(this),
+      options
     );
+    this.sliderItemsArray.forEach((node) => this.observer.observe(node));
   }
 
-  autoPlayToggle() {
-    this.togglePlayButtonState(this.autoplayButtonIsSetToPlay);
-    this.autoplayButtonIsSetToPlay ? this.pause() : this.play();
-    this.autoplayButtonIsSetToPlay = !this.autoplayButtonIsSetToPlay;
-  }
+  onIntersect(entries) {
+    // ignore while we're performing our own instant snap/scroll logic
+    if (this.programmaticAnimating) return;
 
-  focusOutHandling(event) {
-    if (this.sliderAutoplayButton) {
-      const focusedOnAutoplayButton =
-        event.target === this.sliderAutoplayButton ||
-        this.sliderAutoplayButton.contains(event.target);
-      if (!this.autoplayButtonIsSetToPlay || focusedOnAutoplayButton) return;
-      this.play();
-    } else if (
-      !this.reducedMotion.matches &&
-      !this.announcementBarArrowButtonWasClicked
-    ) {
-      this.play();
-    }
-  }
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
 
-  focusInHandling(event) {
-    if (this.sliderAutoplayButton) {
-      const focusedOnAutoplayButton =
-        event.target === this.sliderAutoplayButton ||
-        this.sliderAutoplayButton.contains(event.target);
-      if (focusedOnAutoplayButton && this.autoplayButtonIsSetToPlay) {
-        this.play();
-      } else if (this.autoplayButtonIsSetToPlay) {
-        this.pause();
+      const idx = this.sliderItemsArray.indexOf(entry.target);
+      if (idx === -1) return;
+
+      // clone at end -> user saw the cloned-first slide, snap to real first
+      if (entry.target.classList.contains("clone")) {
+        if (idx === this.firstCloneIndex) {
+          this.snapToReal(1);
+        } else if (idx === this.lastCloneIndex) {
+          // clone at the start -> user saw cloned-last, snap to real last
+          this.snapToReal(this.itemCountReal);
+        }
+        return;
       }
-    } else if (this.announcementBarSlider.contains(event.target)) {
-      this.pause();
-    }
+
+      // real slide became visible: update current page and UI
+      // NOTE: real slides sit at DOM indices 1..N so idx equals realPage
+      const realPage = idx;
+      if (this.currentPage !== realPage) {
+        const prev = this.currentPage;
+        this.currentPage = realPage;
+        this.update(); // dots / aria
+        // run announcement animation with correct direction
+        const direction =
+          realPage > prev || (prev === this.itemCountReal && realPage === 1)
+            ? "next"
+            : "previous";
+        this.applyAnimationToAnnouncementBar(direction);
+        this.setSlideVisibility();
+      }
+    });
+  }
+
+  snapToReal(realPage) {
+    // instant snap: prevent the observer from reacting while we snap
+    this.programmaticAnimating = true;
+    this.currentPage = realPage;
+    const left = this.sliderItemOffset * realPage;
+    this.slider.scrollTo({ left, behavior: "auto" }); // instant
+    this.update();
+    this.setSlideVisibility();
+
+    // small delay then allow observer / autoplay again
+    setTimeout(() => {
+      this.programmaticAnimating = false;
+    }, 60);
+  }
+
+  /********** autoplay & movement **********/
+  setAutoPlay() {
+    this.autoplaySpeed = (Number(this.slider.dataset.speed) || 4) * 1000;
+    this.play();
   }
 
   play() {
@@ -1134,71 +1193,121 @@ class SlideshowComponent extends SliderComponent {
     );
   }
 
-  pause() {
-    this.slider.setAttribute("aria-live", "polite");
-    clearInterval(this.autoplay);
+  autoRotateSlides() {
+    if (this.programmaticAnimating) return;
+
+    // compute the DOM target index to scroll to
+    // from real page i -> DOM index (i + 1). When i === N, target is N+1 (firstClone)
+    const domTargetIndex = this.currentPage + 1;
+    const left = domTargetIndex * this.sliderItemOffset;
+
+    // mark we're doing programmatic smooth scroll so intersection handler doesn't conflict
+    this.programmaticAnimating = true;
+    this.slider.scrollTo({ left, behavior: "smooth" });
+
+    // clear the guard after a reasonable time (smooth scrolling duration varies by browser)
+    // IntersectionObserver will normally handle setting currentPage when the slide becomes visible;
+    // this timeout is a safety to re-enable behaviors.
+    setTimeout(() => {
+      this.programmaticAnimating = false;
+    }, 700);
   }
 
-  togglePlayButtonState(pauseAutoplay) {
-    if (pauseAutoplay) {
-      this.sliderAutoplayButton.classList.add("slideshow__autoplay--paused");
-      this.sliderAutoplayButton.setAttribute(
-        "aria-label",
-        window.accessibilityStrings.playSlideshow
-      );
-    } else {
-      this.sliderAutoplayButton.classList.remove("slideshow__autoplay--paused");
-      this.sliderAutoplayButton.setAttribute(
-        "aria-label",
-        window.accessibilityStrings.pauseSlideshow
-      );
+  /********** controls / user navigation **********/
+  linkToSlide(event) {
+    event.preventDefault();
+    if (!this.sliderControlLinksArray) return;
+    const controlIndex = this.sliderControlLinksArray.indexOf(
+      event.currentTarget
+    ); // 0-based for real slides
+    if (controlIndex === -1) return;
+
+    const realPage = controlIndex + 1; // convert to 1-based real page
+    const left = realPage * this.sliderItemOffset;
+
+    // do a smooth programmatic scroll directly to the real slide
+    this.programmaticAnimating = true;
+    this.slider.scrollTo({ left, behavior: "smooth" });
+
+    // choice: animate announcement bar according to direction of navigation
+    const direction = realPage > this.currentPage ? "next" : "previous";
+    this.applyAnimationToAnnouncementBar(direction);
+
+    setTimeout(() => {
+      this.programmaticAnimating = false;
+      // after user navigation we expect IntersectionObserver to set currentPage when visible,
+      // but force update now to keep UI responsive
+      this.currentPage = realPage;
+      this.update();
+      this.setSlideVisibility();
+    }, 600);
+  }
+
+  /********** UI updates & accessibility **********/
+  update() {
+    super.update && super.update();
+
+    if (!this.sliderControlWrapper) return;
+
+    const sliderControlButtons = Array.from(
+      this.sliderControlWrapper.querySelectorAll(".slider-counter__link")
+    );
+    sliderControlButtons.forEach((link) => {
+      link.classList.remove("slider-counter__link--active");
+      link.removeAttribute("aria-current");
+    });
+
+    // clamp currentPage to 1..N
+    const page = Math.min(Math.max(this.currentPage, 1), this.itemCountReal);
+
+    if (sliderControlButtons.length > 0) {
+      const btn = sliderControlButtons[page - 1];
+      if (btn) {
+        btn.classList.add("slider-counter__link--active");
+        btn.setAttribute("aria-current", "true");
+      }
     }
   }
 
-  autoRotateSlides() {
-    const slideScrollPosition =
-      this.currentPage === this.sliderItems.length
-        ? 0
-        : this.slider.scrollLeft + this.sliderItemOffset;
+  setSlideVisibility() {
+    // operate only on real slides (exclude clones)
+    const realSlides = Array.from(
+      this.slider.querySelectorAll(".slideshow__slide:not(.clone)")
+    );
 
-    this.setSlidePosition(slideScrollPosition);
-    this.applyAnimationToAnnouncementBar();
-  }
-
-  setSlideVisibility(event) {
-    this.sliderItemsToShow.forEach((item, index) => {
+    realSlides.forEach((item, index) => {
       const linkElements = item.querySelectorAll("a");
       if (index === this.currentPage - 1) {
         if (linkElements.length)
-          linkElements.forEach((button) => {
-            button.removeAttribute("tabindex");
-          });
+          linkElements.forEach((btn) => btn.removeAttribute("tabindex"));
         item.setAttribute("aria-hidden", "false");
         item.removeAttribute("tabindex");
       } else {
         if (linkElements.length)
-          linkElements.forEach((button) => {
-            button.setAttribute("tabindex", "-1");
-          });
+          linkElements.forEach((btn) => btn.setAttribute("tabindex", "-1"));
         item.setAttribute("aria-hidden", "true");
         item.setAttribute("tabindex", "-1");
       }
     });
-    this.wasClicked = false;
   }
 
   applyAnimationToAnnouncementBar(button = "next") {
     if (!this.announcementBarSlider) return;
 
-    const itemsCount = this.sliderItems.length;
+    const itemsCount = this.itemCountReal;
     const increment = button === "next" ? 1 : -1;
 
     const currentIndex = this.currentPage - 1;
     let nextIndex = (currentIndex + increment) % itemsCount;
     nextIndex = nextIndex === -1 ? itemsCount - 1 : nextIndex;
 
-    const nextSlide = this.sliderItems[nextIndex];
-    const currentSlide = this.sliderItems[currentIndex];
+    const realSlides = Array.from(
+      this.slider.querySelectorAll(".slideshow__slide:not(.clone)")
+    );
+    const nextSlide = realSlides[nextIndex];
+    const currentSlide = realSlides[currentIndex];
+
+    if (!currentSlide || !nextSlide) return;
 
     const animationClassIn = "announcement-bar-slider--fade-in";
     const animationClassOut = "announcement-bar-slider--fade-out";
@@ -1218,19 +1327,6 @@ class SlideshowComponent extends SliderComponent {
       currentSlide.classList.remove(`${animationClassOut}-${direction}`);
       nextSlide.classList.remove(`${animationClassIn}-${direction}`);
     }, this.announcerBarAnimationDelay * 2);
-  }
-
-  linkToSlide(event) {
-    event.preventDefault();
-    const slideScrollPosition =
-      this.slider.scrollLeft +
-      this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) +
-          1 -
-          this.currentPage);
-    this.slider.scrollTo({
-      left: slideScrollPosition,
-    });
   }
 }
 

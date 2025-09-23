@@ -30,70 +30,71 @@
   class="slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}"
   role="region"
   aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
-  aria-label="{{ section.settings.accessibility_info | escape }}">
+  aria-label="{{ section.settings.accessibility_info | escape }}"
+  data-loop="{{ section.settings.enable_looping }}">
   {%- if section.settings.auto_rotate and section.blocks.size > 1 -%}
-    <div class="slideshow__controls slideshow__controls--top slider-buttons{% if section.settings.show_text_below %} slideshow__controls--border-radius-mobile{% endif %}">
-      {% if section.settings.show_nav_button %}
-        <button
-          type="button"
-          class="slider-button slider-button--prev"
-          name="previous"
-          aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}"
-          aria-controls="Slider-{{ section.id }}">
-          <span class="svg-wrapper">
-            {{- 'icon-caret.svg' | inline_asset_content -}}
+    <div class="slideshow__controls slideshow__controls--top slider-buttons{% if section.settings.show_text_below %} slideshow__controls--border-radius-mobile{% endif %} {% unless section.settings.show_nav_button %}slider-buttons--hidden{% endunless %}">
+      {% comment %} {% if section.settings.show_nav_button %} {% endcomment %}
+      <button
+        type="button"
+        class="slider-button slider-button--prev"
+        name="previous"
+        aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}"
+        aria-controls="Slider-{{ section.id }}">
+        <span class="svg-wrapper">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+      </button>
+      <div class="slider-counter slider-counter--{{ section.settings.slider_visual }}{% if section.settings.slider_visual == 'counter' or section.settings.slider_visual == 'numbers' %} caption{% endif %}">
+        {%- if section.settings.slider_visual == 'counter' -%}
+          <span class="slider-counter--current">1</span>
+          <span aria-hidden="true">
+            /
           </span>
-        </button>
-        <div class="slider-counter slider-counter--{{ section.settings.slider_visual }}{% if section.settings.slider_visual == 'counter' or section.settings.slider_visual == 'numbers' %} caption{% endif %}">
-          {%- if section.settings.slider_visual == 'counter' -%}
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true">
-              /
-            </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ section.blocks.size }}</span>
-          {%- else -%}
-            <div class="slideshow__control-wrapper">
-              {%- for block in section.blocks -%}
-                <button
-                  class="slider-counter__link slider-counter__link--{{ section.settings.slider_visual }} link"
-                  aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
-                  aria-controls="Slider-{{ section.id }}">
-                  {%- if section.settings.slider_visual == 'numbers' -%}
-                    {{ forloop.index -}}
-                  {%- else -%}
-                    <span class="dot"></span>
-                  {%- endif -%}
-                </button>
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
-        </div>
-        <button
-          type="button"
-          class="slider-button slider-button--next"
-          name="next"
-          aria-label="{{ 'sections.slideshow.next_slideshow' | t }}"
-          aria-controls="Slider-{{ section.id }}">
-          <span class="svg-wrapper">
-            {{- 'icon-caret.svg' | inline_asset_content -}}
-          </span>
-        </button>
-
-        {%- if section.settings.auto_rotate -%}
-          <button
-            type="button"
-            class="slideshow__autoplay slider-button{% if section.settings.auto_rotate == false %} slideshow__autoplay--paused{% endif %}"
-            aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}">
-            <span class="svg-wrapper">
-              {{- 'icon-pause.svg' | inline_asset_content -}}
-            </span>
-            <span class="svg-wrapper">
-              {{- 'icon-play.svg' | inline_asset_content -}}
-            </span>
-          </button>
+          <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+          <span class="slider-counter--total">{{ section.blocks.size }}</span>
+        {%- else -%}
+          <div class="slideshow__control-wrapper">
+            {%- for block in section.blocks -%}
+              <button
+                class="slider-counter__link slider-counter__link--{{ section.settings.slider_visual }} link"
+                aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+                aria-controls="Slider-{{ section.id }}">
+                {%- if section.settings.slider_visual == 'numbers' -%}
+                  {{ forloop.index -}}
+                {%- else -%}
+                  <span class="dot"></span>
+                {%- endif -%}
+              </button>
+            {%- endfor -%}
+          </div>
         {%- endif -%}
-      {% endif %}
+      </div>
+      <button
+        type="button"
+        class="slider-button slider-button--next"
+        name="next"
+        aria-label="{{ 'sections.slideshow.next_slideshow' | t }}"
+        aria-controls="Slider-{{ section.id }}">
+        <span class="svg-wrapper">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+      </button>
+
+      {%- if section.settings.auto_rotate -%}
+        <button
+          type="button"
+          class="slideshow__autoplay slider-button{% if section.settings.auto_rotate == false %} slideshow__autoplay--paused{% endif %}"
+          aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}">
+          <span class="svg-wrapper">
+            {{- 'icon-pause.svg' | inline_asset_content -}}
+          </span>
+          <span class="svg-wrapper">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </span>
+        </button>
+      {%- endif -%}
+    {% comment %} {% endif %} {% endcomment %}
     </div>
   {%- endif -%}
 
@@ -327,6 +328,11 @@
         "id": "auto_rotate",
         "label": "t:sections.slideshow.settings.auto_rotate.label",
         "default": false
+      }, {
+        "type": "checkbox",
+        "id": "enable_looping",
+        "label": "Enable looping",
+        "default": true
       }, {
         "type": "range",
         "id": "change_slides_speed",
