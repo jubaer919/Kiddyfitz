@@ -192,11 +192,17 @@
         "show_text_below": true,
         "accessibility_label": "Slideshow section"
       }
+    },
+    "demo_section_N7WCTn": {
+      "type": "demo-section",
+      "name": "Demo Section",
+      "settings": {}
     }
   },
   "order": [
     "slideshow_EBbzFb",
     "featured_collection",
-    "swiper_slideshow_ByWUb7"
+    "swiper_slideshow_ByWUb7",
+    "demo_section_N7WCTn"
   ]
 }
