@@ -161,6 +161,7 @@
         "slide_h6q93h": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/pexels-pavel-danilyuk-8421909.jpg",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_size": "h1",
