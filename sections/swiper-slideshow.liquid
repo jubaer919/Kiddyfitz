@@ -133,6 +133,7 @@
     "disabled_on": {
       "groups": ["header", "footer"]
     },
+    "max_blocks": 5,
     "settings": [
       {
         "type": "select",
@@ -156,20 +157,22 @@
         "default": true
       },
       {
-        "type": "number",
+        "type": "range",
         "id": "slides_per_view",
         "label": "Slides Per View",
         "default": 1,
         "min": 1,
-        "max": 5
+        "max": 5,
+        "step": 1
       },
       {
-        "type": "number",
+        "type": "range",
         "id": "slides_per_group",
         "label": "Slides To Move Each Swipe",
         "default": 1,
         "min": 1,
-        "max": 5
+        "max": 5,
+        "step": 1
       }, {
         "type": "select",
         "id": "slide_height",
@@ -253,16 +256,16 @@
         "content": "Accessibility Settings"
       }, {
         "type": "text",
-        "id": "accessibility_info",
-        "label": "Accessibility Info",
-        "default": "Swiper Slideshow Section"
+        "id": "accessibility_label",
+        "label": "Accessibility Label",
+        "default": "Slideshow section",
+        "info": "Describes this section for screen readers"
       }
     ],
     "blocks": [
       {
         "type": "slide",
         "name": "Slide",
-        "limit": 5,
         "settings": [
           {
             "type": "image_picker",
@@ -290,16 +293,16 @@
             "label": "Heading Size",
             "options": [
               {
+                "value": "h0",
+                "label": "H0"
+              },
+              {
                 "value": "h1",
                 "label": "H1"
               },
               {
                 "value": "h2",
                 "label": "H2"
-              },
-              {
-                "value": "h0",
-                "label": "H0"
               },
               {
                 "value": "hxl",
