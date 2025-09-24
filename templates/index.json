@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slideshow_EBbzFb": {
@@ -89,6 +98,7 @@
         "slide_height": "medium",
         "slider_visual": "counter",
         "auto_rotate": true,
+        "enable_looping": true,
         "change_slides_speed": 5,
         "image_behavior": "none",
         "show_text_below": true,
@@ -122,7 +132,75 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "demo_section": {
+      "type": "demo-section",
+      "settings": {}
+    },
+    "swiper_slideshow_ByWUb7": {
+      "type": "swiper-slideshow",
+      "blocks": {
+        "slide_nnBRkX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/pexels-shkrabaanthony-6261877.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide_h6q93h": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_nnBRkX",
+        "slide_h6q93h"
+      ],
+      "name": "Swiper Slideshow",
+      "settings": {
+        "layout": "full_bleed",
+        "show_nav_button": true,
+        "slides_per_view": 1,
+        "slides_per_group": 1,
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "enable_looping": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_label": "Slideshow section"
+      }
     }
   },
-  "order": ["slideshow_EBbzFb", "featured_collection", "demo_section"]
+  "order": [
+    "slideshow_EBbzFb",
+    "featured_collection",
+    "demo_section",
+    "swiper_slideshow_ByWUb7"
+  ]
 }
