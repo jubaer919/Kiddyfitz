@@ -133,10 +133,6 @@
         "padding_bottom": 36
       }
     },
-    "demo_section": {
-      "type": "demo-section",
-      "settings": {}
-    },
     "swiper_slideshow_ByWUb7": {
       "type": "swiper-slideshow",
       "blocks": {
@@ -201,7 +197,6 @@
   "order": [
     "slideshow_EBbzFb",
     "featured_collection",
-    "demo_section",
     "swiper_slideshow_ByWUb7"
   ]
 }
