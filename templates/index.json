@@ -171,11 +171,30 @@
             "text_alignment_mobile": "center",
             "color_scheme": ""
           }
+        },
+        "slide_nPmNgU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/pexels-ron-lach-9511977.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "Slide heading",
+            "heading_size": "h1",
+            "subheading": "Slide subheading text",
+            "button_label": "Shop now",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "text_position": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
         }
       },
       "block_order": [
         "slide_nnBRkX",
-        "slide_h6q93h"
+        "slide_h6q93h",
+        "slide_nPmNgU"
       ],
       "name": "Swiper Slideshow",
       "settings": {
