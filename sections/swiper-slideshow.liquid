@@ -1,129 +1,22 @@
-<div
-  class="swiper-container slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}"
-  id="swiper-slideshow-{{ section.id }}"
-  role="region"
-  aria-label="{{ section.settings.accessibility_info | escape }}"
-  data-loop="{{ section.settings.enable_looping }}"
-  data-autoplay="{{ section.settings.auto_rotate }}"
-  data-slidesPerView="{{ section.settings.slides_per_view }}"
-  data-slidesPerGroup="{{ section.settings.slides_per_group }}"
-  data-delay="{{ section.settings.change_slides_speed | times: 1000 }}"
-  data-show-arrows="{{ section.settings.show_nav_button }}"
-  data-slider-visual="{{ section.settings.slider_visual }}">
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
 
+
+<div class="swiper mySwiper">
   <div class="swiper-wrapper">
-    {%- for block in section.blocks -%}
-      <div
-        class="swiper-slide"
-        id="Slide-{{ section.id }}-{{ forloop.index }}"
-        role="group"
-        aria-roledescription="{{ 'sections.swiper_slideshow.slide' | t }}"
-        aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
-        tabindex="-1">
-
-        {%- style -%}
-          #Slide-{{ section.id }}-{{ forloop.index }}
-          .slide__overlay::after {
-            opacity: {{ block.settings.image_overlay_opacity | divided_by: 100.0 }};
-            content: '';
-            display: block;
-          }
-        {%- endstyle -%}
-
-        <div class="slide__media media{% if block.settings.image == blank %} placeholder{% endif %}">
-          {%- if block.settings.image -%}
-            {%- liquid
-              assign height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
-              if section.settings.image_behavior == 'ambient'
-                assign sizes = '120vw'
-                assign widths = '450,660,900,1320,1800,2136,2400,3600,7680'
-              else
-                assign sizes = '100vw'
-                assign widths = '375,550,750,1100,1500,1780,2000,3000,3840'
-              endif
-              assign fetch_priority = 'auto'
-              if forloop.first
-                assign fetch_priority = 'high'
-              endif
-            -%}
-            {%- if forloop.first -%}
-              {{ block.settings.image | image_url: width: 3840 | image_tag: height: height, sizes: sizes, widths: widths, fetchpriority: fetch_priority }}
-            {%- else -%}
-              {{ block.settings.image | image_url: width: 3840 | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths }}
-            {%- endif -%}
-          {%- else -%}
-            {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
-            {%- if placeholder_slide == 1 -%}
-              {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- else -%}
-              {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-          {%- endif -%}
-          <div class="slide__overlay"></div>
-        </div>
-
-        <div class="slide__text-wrapper banner__content banner__content--{{ block.settings.box_align }} page-width{% if block.settings.show_text_box == false %} banner--desktop-transparent{% endif %}">
-          <div class="slide__text banner__box content-container content-container--full-width-mobile color-{{ block.settings.color_scheme }} gradient slide__text--{{ block.settings.text_alignment }} slide__text-mobile--{{ block.settings.text_alignment_mobile }}">
-
-            {%- if block.settings.heading != blank -%}
-              <h2 class="slide__heading inline-richtext {{ block.settings.heading_size }}">
-                {{ block.settings.heading }}
-              </h2>
-            {%- endif -%}
-
-            {%- if block.settings.subheading != blank -%}
-              <div class="slide__subheading rte">
-                <p>{{ block.settings.subheading }}</p>
-              </div>
-            {%- endif -%}
-
-            {%- if block.settings.button_label != blank -%}
-              <div class="slide__buttons">
-                <a
-                  {% if block.settings.link %}
-                  href="{{ block.settings.link }}"
-                  {% else %}
-                  role="link"
-                  aria-disabled="true"
-                  {% endif %}
-                  class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}">
-                  {{ block.settings.button_label | escape }}
-                </a>
-              </div>
-            {%- endif -%}
-
-          </div>
-        </div>
+    {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <img src="{{ block.settings.image | image_url }}" alt="">
       </div>
-    {%- endfor -%}
+    {% endfor %}
   </div>
 
-  {%- comment -%} Pagination / arrows can go here if needed {%- endcomment -%}
-
-  {%- if section.blocks.size > 1 and section.settings.show_nav_button -%}
-    <div class="swiper-navigation">
-      <button class="swiper-button-prev" aria-label="{{ 'sections.swiper_slideshow.previous_slideshow' | t }}">
-        <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
-      </button>
-      <button class="swiper-button-next" aria-label="{{ 'sections.swiper_slideshow.next_slideshow' | t }}">
-        <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
-      </button>
-    </div>
-  {%- endif -%}
-
-  {%- if section.blocks.size > 1 and section.settings.slider_visual != blank -%}
-    <div class="swiper-pagination swiper-pagination-{{ section.id }}">
-      {%- if section.settings.slider_visual == 'dots' -%}
-      <!-- Swiper will generate dots automatically -->
-      {%- elsif section.settings.slider_visual == 'counter' or section.settings.slider_visual == 'numbers' -%}
-        <span class="slider-counter--current">1</span>
-        <span>/</span>
-        <span class="slider-counter--total">{{ section.blocks.size }}</span>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
 </div>
+
+{{ 'swiper.min.js' | asset_url | script_tag }}
+{{ 'swiper-slider.js' | asset_url | script_tag }}
 
 {% schema %}
   {
@@ -133,7 +26,6 @@
     "disabled_on": {
       "groups": ["header", "footer"]
     },
-    "max_blocks": 5,
     "settings": [
       {
         "type": "select",
@@ -147,39 +39,22 @@
             "label": "Grid"
           }
         ],
-        "default": "full_bleed",
-        "label": "Layout"
+        "label": "Layout",
+        "default": "full_bleed"
       },
       {
         "type": "checkbox",
         "id": "show_nav_button",
-        "label": "Show Prev or Next Button",
+        "label": "Show navigation arrows",
         "default": true
       },
       {
-        "type": "range",
-        "id": "slides_per_view",
-        "label": "Slides Per View",
-        "default": 1,
-        "min": 1,
-        "max": 5,
-        "step": 1
-      },
-      {
-        "type": "range",
-        "id": "slides_per_group",
-        "label": "Slides To Move Each Swipe",
-        "default": 1,
-        "min": 1,
-        "max": 5,
-        "step": 1
-      }, {
         "type": "select",
         "id": "slide_height",
         "options": [
           {
             "value": "adapt_image",
-            "label": "Adapt to Image"
+            "label": "Adapt Image"
           }, {
             "value": "small",
             "label": "Small"
@@ -191,34 +66,35 @@
             "label": "Large"
           }
         ],
-        "default": "medium",
-        "label": "Slide Height"
-      }, {
+        "label": "Slide Height",
+        "default": "medium"
+      },
+      {
         "type": "select",
         "id": "slider_visual",
         "options": [
           {
             "value": "dots",
-            "label": "Dots"
+            "label": "Dots navigation"
           }, {
             "value": "counter",
-            "label": "Counter"
+            "label": "Slide counter"
           }, {
             "value": "numbers",
-            "label": "Numbers"
+            "label": "Numbered pagination"
           }
         ],
         "default": "counter",
-        "label": "Slider Visual"
+        "label": "Navigation style"
       }, {
         "type": "checkbox",
         "id": "auto_rotate",
         "label": "Auto Rotate",
-        "default": false
+        "default": true
       }, {
         "type": "checkbox",
         "id": "enable_looping",
-        "label": "Enable Looping",
+        "label": "Enable looping",
         "default": true
       }, {
         "type": "range",
@@ -227,7 +103,7 @@
         "max": 9,
         "step": 2,
         "unit": "s",
-        "label": "Change Slides Speed",
+        "label": "Autoplay speed",
         "default": 5
       }, {
         "type": "select",
@@ -238,39 +114,40 @@
             "label": "None"
           }, {
             "value": "ambient",
-            "label": "Ambient"
+            "label": "Ambient animation"
           }
         ],
         "default": "none",
-        "label": "Image Behavior"
+        "label": "Image animation effect"
       }, {
         "type": "header",
-        "content": "Mobile Settings"
+        "content": "Mobile settings"
       }, {
         "type": "checkbox",
         "id": "show_text_below",
-        "label": "Show Text Below",
+        "label": "Show text below image on mobile",
         "default": true
       }, {
         "type": "header",
-        "content": "Accessibility Settings"
+        "content": "Accessibility"
       }, {
         "type": "text",
         "id": "accessibility_label",
-        "label": "Accessibility Label",
-        "default": "Slideshow section",
-        "info": "Describes this section for screen readers"
+        "label": "Screen reader description",
+        "info": "Describe this slideshow for visually impaired users",
+        "default": "Image slideshow"
       }
     ],
     "blocks": [
       {
         "type": "slide",
         "name": "Slide",
+        "limit": 5,
         "settings": [
           {
             "type": "image_picker",
             "id": "image",
-            "label": "Slide Image"
+            "label": "Slide image"
           },
           {
             "type": "range",
@@ -279,66 +156,80 @@
             "max": 100,
             "step": 10,
             "unit": "%",
-            "label": "Image Overlay Opacity",
-            "default": 0
+            "label": "Image overlay opacity",
+            "default": 0,
+            "info": "Increase to improve text readability on bright images"
+          },
+          {
+            "type": "header",
+            "content": "Text content"
           },
           {
             "type": "inline_richtext",
             "id": "heading",
+            "default": "Slide heading",
             "label": "Heading"
-          },
-          {
+          }, {
             "type": "select",
             "id": "heading_size",
-            "label": "Heading Size",
             "options": [
               {
-                "value": "h0",
-                "label": "H0"
+                "value": "h2",
+                "label": "Small"
               },
               {
                 "value": "h1",
-                "label": "H1"
+                "label": "Medium"
               },
               {
-                "value": "h2",
-                "label": "H2"
+                "value": "h0",
+                "label": "Large"
               },
               {
                 "value": "hxl",
-                "label": "HXL"
+                "label": "Extra large"
               }, {
                 "value": "hxxl",
-                "label": "HXXL"
+                "label": "Extra extra large"
               }
             ],
-            "default": "h1"
+            "default": "h1",
+            "label": "Heading size"
           }, {
             "type": "inline_richtext",
             "id": "subheading",
+            "default": "Slide subheading text",
             "label": "Subheading"
+          }, {
+            "type": "header",
+            "content": "Button"
           }, {
             "type": "text",
             "id": "button_label",
-            "label": "Button Label"
+            "default": "Shop now",
+            "label": "Button label",
+            "info": "Leave empty to hide the button"
           }, {
             "type": "url",
             "id": "link",
-            "label": "Button Link"
+            "label": "Slide link"
           }, {
             "type": "checkbox",
             "id": "button_style_secondary",
-            "label": "Secondary Button Style",
+            "label": "Use outline button style",
             "default": false
+          }, {
+            "type": "header",
+            "content": "Layout options"
           }, {
             "type": "checkbox",
             "id": "show_text_box",
-            "label": "Show Text Box",
-            "default": true
+            "label": "Show text content",
+            "default": true,
+            "info": "Uncheck to hide heading, subheading, and button"
           }, {
             "type": "select",
-            "id": "box_align",
-            "label": "Box Align",
+            "id": "text_position",
             "options": [
               {
                 "value": "top-left",
@@ -372,28 +263,28 @@
                 "label": "Bottom Right"
               }
             ],
-            "default": "middle-center"
+            "default": "middle-center",
+            "label": "Text position"
           }, {
             "type": "select",
             "id": "text_alignment",
-            "label": "Text Alignment",
             "options": [
               {
                 "value": "left",
-                "label": "Left"
+                "label": "Left aligned"
               }, {
                 "value": "center",
-                "label": "Center"
+                "label": "Center aligned"
               }, {
                 "value": "right",
-                "label": "Right"
+                "label": "Right aligned"
               }
             ],
-            "default": "center"
+            "default": "center",
+            "label": "Text alignment"
           }, {
             "type": "select",
             "id": "text_alignment_mobile",
-            "label": "Text Alignment Mobile",
             "options": [
               {
                 "value": "left",
@@ -406,11 +297,12 @@
                 "label": "Right"
               }
             ],
-            "default": "center"
+            "default": "center",
+            "label": "Text alignment (mobile)"
           }, {
             "type": "color_scheme",
             "id": "color_scheme",
-            "label": "Color Scheme",
+            "label": "Color scheme",
             "default": "scheme-1"
           }
         ]

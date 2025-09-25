@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   swiperSections.forEach((section) => {
     const container = section.querySelector(".swiper-container");
+    alert("this code is running");
 
     const loop = container.dataset.loop === "true";
     const autoplayEnabled = container.dataset.autoplay === "true";
