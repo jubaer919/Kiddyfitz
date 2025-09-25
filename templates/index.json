@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slideshow_EBbzFb": {
@@ -139,7 +148,7 @@
             "link": "",
             "button_style_secondary": false,
             "show_text_box": true,
-            "box_align": "middle-center",
+            "text_position": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
             "color_scheme": ""
@@ -157,20 +166,21 @@
             "link": "",
             "button_style_secondary": false,
             "show_text_box": true,
-            "box_align": "middle-center",
+            "text_position": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
             "color_scheme": ""
           }
         }
       },
-      "block_order": ["slide_nnBRkX", "slide_h6q93h"],
+      "block_order": [
+        "slide_nnBRkX",
+        "slide_h6q93h"
+      ],
       "name": "Swiper Slideshow",
       "settings": {
         "layout": "full_bleed",
         "show_nav_button": true,
-        "slides_per_view": 1,
-        "slides_per_group": 1,
         "slide_height": "medium",
         "slider_visual": "counter",
         "auto_rotate": false,
@@ -180,17 +190,11 @@
         "show_text_below": true,
         "accessibility_label": "Slideshow section"
       }
-    },
-    "demo_section_N7WCTn": {
-      "type": "demo-section",
-      "name": "Demo Section",
-      "settings": {}
     }
   },
   "order": [
     "slideshow_EBbzFb",
     "featured_collection",
-    "swiper_slideshow_ByWUb7",
-    "demo_section_N7WCTn"
+    "swiper_slideshow_ByWUb7"
   ]
 }
