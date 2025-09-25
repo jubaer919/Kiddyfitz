@@ -9,102 +9,6 @@
  */
 {
   "sections": {
-    "slideshow_EBbzFb": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_WHYQtk": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/pexels-pavel-danilyuk-8421909.jpg",
-            "image_overlay_opacity": 10,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-1"
-          }
-        },
-        "slide_mVyVib": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/pexels-shkrabaanthony-6261877.jpg",
-            "image_overlay_opacity": 10,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-1"
-          }
-        },
-        "slide_FLkhyN": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/pexels-ron-lach-9511977.jpg",
-            "image_overlay_opacity": 10,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-1"
-          }
-        },
-        "slide_49CNwf": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/pexels-d-ng-thanh-tu-2922122-5693889.jpg",
-            "image_overlay_opacity": 10,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_WHYQtk",
-        "slide_mVyVib",
-        "slide_FLkhyN",
-        "slide_49CNwf"
-      ],
-      "name": "t:sections.slideshow.presets.name",
-      "settings": {
-        "layout": "full_bleed",
-        "show_nav_button": false,
-        "slide_height": "medium",
-        "slider_visual": "counter",
-        "auto_rotate": true,
-        "enable_looping": true,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Slideshow about our brand"
-      }
-    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -212,8 +116,7 @@
     }
   },
   "order": [
-    "slideshow_EBbzFb",
-    "featured_collection",
-    "swiper_slideshow_ByWUb7"
+    "swiper_slideshow_ByWUb7",
+    "featured_collection"
   ]
 }
