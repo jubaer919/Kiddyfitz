@@ -202,7 +202,7 @@
         "show_nav_button": true,
         "slide_height": "medium",
         "slider_visual": "counter",
-        "auto_rotate": false,
+        "auto_rotate": true,
         "enable_looping": true,
         "change_slides_speed": 5,
         "image_behavior": "none",
