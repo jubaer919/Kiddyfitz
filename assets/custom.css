@@ -110,12 +110,12 @@
 }
 .swiper--medium .swiper-slide img {
   width: 100%;
-  height: 500px;
+  height: 700px;
   object-fit: cover;
 }
 .swiper--large .swiper-slide img {
   width: 100%;
-  height: 700px;
+  height: 900px;
   object-fit: cover;
 }
 
