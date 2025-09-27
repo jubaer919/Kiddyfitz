@@ -87,6 +87,14 @@
       {%- endif -%}
     </div>
 
+    <div class="collection-tabs">
+      {% for block in section.blocks %}
+        <button class="collection-tab-btn" data-block-id="{{ block.id }}">
+          {{ block.settings.tab_label }}
+        </button>
+      {% endfor %}
+    </div>
+
     <slider-component class="slider-mobile-gutter{% if section.settings.full_width %} slider-component-full-width{% endif %}{% if show_mobile_slider == false %} page-width{% endif %}{% if show_desktop_slider == false and section.settings.full_width == false %} page-width-desktop{% endif %}{% if show_desktop_slider %} slider-component-desktop{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <ul
         id="Slider-{{ section.id }}"
@@ -472,9 +480,31 @@
         "default": 36
       }
     ],
+    "blocks": [
+      {
+        "type": "collection_tab",
+        "name": "Collection Tab",
+        "settings": [
+          {
+            "type": "text",
+            "id": "tab_label",
+            "label": "Button label"
+          }, {
+            "type": "collection",
+            "id": "tab_collection",
+            "label": "Choose collection"
+          }
+        ]
+      }
+    ],
     "presets": [
       {
-        "name": "t:sections.featured-collection.presets.name"
+        "name": "t:sections.featured-collection.presets.name",
+        "blocks": [
+          {
+            "type": "collection_tab"
+          }
+        ]
       }
     ]
   }
