@@ -95,10 +95,18 @@
             "tab_label": "Boys Pants",
             "tab_collection": "boy-pants"
           }
+        },
+        "collection_tab_aaMJjG": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Boy Shirt",
+            "tab_collection": "boy-shirt"
+          }
         }
       },
       "block_order": [
-        "collection_tab_6trnr6"
+        "collection_tab_6trnr6",
+        "collection_tab_aaMJjG"
       ],
       "settings": {
         "collection": "all",
