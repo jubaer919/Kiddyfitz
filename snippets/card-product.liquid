@@ -61,7 +61,7 @@
       >
         {%- if card_product.featured_media -%}
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-            <div class="media media--transparent custom-hover_effect">
+            <div class="media media--transparent custom-media">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
                 srcset="
@@ -108,6 +108,46 @@
             </div>
           </div>
         {%- endif -%}
+
+        <div class="icon-container" role="group" aria-label="Product actions">
+          <!-- View / product details -->
+          <div class="icon-holder">
+            <a href="{{ card_product.url }}" class="icon-link icon-view" title="{{ 'products.product.view' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icon icon-eye" width="22" height="22">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <span class="visually-hidden">{{ 'products.product.view' | t }}</span>
+            </a>
+          </div>
+          <!-- Wishlist (client-side, localStorage) -->
+          <div class="icon-holder">
+            <button type="button"
+                    class="icon-link icon-wishlist"
+                    data-product-id="{{ card_product.id }}"
+                    aria-pressed="false"
+                    title="Add to wishlist">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icon icon-heart" width="22" height="22">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              <span class="visually-hidden">Add to wishlist</span>
+            </button>
+          </div>
+          <!-- Add to Cart (AJAX) -->
+          <div class="icon-holder">
+            <button type="button"
+                    class="icon-link icon-cart"
+                    data-variant-id="{{ variant_id }}"
+                    title="Add to cart">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icon icon-cart" width="22" height="22">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              <span class="visually-hidden">Add to cart</span>
+            </button>
+          </div>
+        </div>
         <div class="card__content">
           <div class="card__information">
             <h3
@@ -119,26 +159,9 @@
                 {{ card_product.title | escape }}
             </h3>
           </div>
-          <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
-              <span
-                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-              >
-                {{- 'products.product.sold_out' | t -}}
-              </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-              <span
-                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-              >
-                {{- 'products.product.on_sale' | t -}}
-              </span>
-            {%- endif -%}
-          </div>
         </div>
       </div>
-      <div class="card__content">
+      <div class="card__content card__content-featured">
         <div class="card__information">
           <h3
             class="heading__custom-design card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
@@ -192,7 +215,22 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            {% assign moneySign = cart.currency.symbol %}
+            {% assign price = card_product.price | money_without_currency %}
+            {% assign comparePrice = card_product.compare_at_price | money_without_currency %}
+
+            <div class="price-container">
+              <p class="price-current">
+                <span class="money-sign">{{ moneySign }}</span> {{ price }}
+              </p>
+
+              {% if comparePrice > price %}
+                <p class="price-compare">
+                  <span class="money-sign">{{ moneySign }}</span> {{ comparePrice }}
+                </p>
+              {% endif %}
+            </div>
+
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                 {% liquid

@@ -230,31 +230,24 @@
   opacity: 1;
 }
 
-#card-featured:hover {
-  color: #5177cc;
-}
-
 #card-featured {
   position: relative;
-  height: 35rem;
+  height: 40rem;
+  max-height: 40rem;
   text-align: center;
 }
 
 .card__inner {
-  height: 70%;
-}
-
-#card-featured .custom-hover_effect {
-  border: 1px solid red;
+  height: 80%;
+  overflow: hidden;
 }
 
 #card-featured .custom-hover_effect img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   transition: all 0.5s ease;
+  object-fit: cover;
 }
 
 #card-featured .custom-hover_effect img:first-child {
@@ -271,4 +264,112 @@
 
 #card-featured .custom-hover_effect:hover img:nth-child(2) {
   transform: translateX(0);
+}
+
+.card__content-featured {
+  transition: all 0.2s ease;
+  color: #5177cc;
+  margin-top: -1px;
+}
+
+#card-featured:hover .card__content-featured {
+  background-color: #fff;
+}
+
+.heading__custom-design {
+  color: #5177cc;
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.price-container {
+  text-align: center;
+  color: #5177cc;
+  margin: 0;
+  padding: 0;
+}
+
+.price-container span,
+.price-container p {
+  color: #5177cc;
+}
+
+.price-current,
+.price-compare {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.money-sign {
+  font-size: 12px;
+  vertical-align: text-top;
+}
+
+.price-current {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.price-compare {
+  margin-left: 10px;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.icon-container {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  z-index: 30;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+#card-featured:hover .icon-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.icon-link,
+.icon-link svg {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.icon-holder {
+  background-color: #777;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+}
+
+.icon-holder:hover {
+  background-color: #5177cc;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.icon-link svg {
+  width: 16px;
+  height: 16px;
 }
