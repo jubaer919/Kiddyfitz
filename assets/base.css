@@ -1165,9 +1165,9 @@ summary::-webkit-details-marker {
   border-radius: 50%;
 }
 
-.media.media--hover-effect > img + img {
+/* .media.media--hover-effect > img + img {
   opacity: 0;
-}
+} */
 
 @media screen and (min-width: 990px) {
   .media--cropped {

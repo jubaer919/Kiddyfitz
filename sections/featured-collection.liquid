@@ -118,7 +118,7 @@
                 data-cascade
                 style="--animation-order: {{ forloop.index }};"
                 {% endif %}>
-                {% render 'card-product-featured'
+                {% render 'card-product'
                   , card_product: product
                   , media_aspect_ratio: section.settings.image_ratio
                   , image_shape: section.settings.image_shape
@@ -212,6 +212,25 @@
     {%- endif -%}
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const productSlider = document.querySelector('#Slider-{{ section.id }}');
+  
+    productSlider.addEventListener('mouseover', function(event) {
+      const productCard = event.target.closest('.grid__item');
+      
+      if (productCard) {
+        const customElement = productCard.querySelector('.custom_effect');
+        if (customElement && productCard.contains(event.target)) {
+        
+          alert('you complete the mouse over effect')
+        }
+      }
+    });
+  });
+</script>
+
 
 {% schema %}
   {
