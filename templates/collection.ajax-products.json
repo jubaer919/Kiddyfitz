@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "ajax-collection-grid": {
+      "type": "ajax-collection-grid",
+      "settings": {}
+    }
+  },
+  "order": ["ajax-collection-grid"]
+}

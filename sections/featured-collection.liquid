@@ -71,7 +71,7 @@
     data-id="{{ section.id }}">
     <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
       {%- if section.settings.title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <h2 class="title-featured title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {{ section.settings.title }}
         </h2>
       {%- endif -%}
@@ -88,8 +88,14 @@
     </div>
 
     <div class="collection-tabs">
+      <button class="collection-tab-btn active" data-collection-handle="all">
+        All Products
+      </button>
       {% for block in section.blocks %}
-        <button class="collection-tab-btn" data-block-id="{{ block.id }}">
+        <button
+          class="collection-tab-btn"
+          data-block-id="{{ block.id }}"
+          data-collection-handle="{{ block.settings.tab_collection.handle }}">
           {{ block.settings.tab_label }}
         </button>
       {% endfor %}
@@ -201,7 +207,7 @@
       <div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <a
           href="{{ section.settings.collection.url }}"
-          class="{% if section.settings.view_all_style == 'link' %}link underlined-link{% elsif section.settings.view_all_style == 'solid' %}button{% else %}button button--secondary{% endif %}"
+          class="view_all-featured {% if section.settings.view_all_style == 'link' %}link underlined-link{% elsif section.settings.view_all_style == 'solid' %}button{% else %}button button--secondary{% endif %}"
           aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title | escape }}">
           {{ 'sections.featured_collection.view_all' | t }}
         </a>
@@ -214,20 +220,56 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const productSlider = document.querySelector('#Slider-{{ section.id }}');
+  document.querySelectorAll('.collection-tab-btn').forEach((btn) => {
+  btn.addEventListener('click', function() {
+    const handle = btn.dataset.collectionHandle;
+    const productList = document.querySelector(`#Slider-{{ section.id }}`);
+    const sliderComponent = productList.closest('slider-component');
+    const sliderButtons = sliderComponent.querySelector('.slider-buttons');
   
-    productSlider.addEventListener('mouseover', function(event) {
-      const productCard = event.target.closest('.grid__item');
-      
-      if (productCard) {
-        const customElement = productCard.querySelector('.custom_effect');
-        if (customElement && productCard.contains(event.target)) {
+    document.querySelectorAll('.collection-tab-btn').forEach((b) => {
+      b.classList.remove('active')
+    })
+  
+    this.classList.add('active')
+  
+    productList.innerHTML = '<p>Loading products...</p>';
+    
+    // Hide slider buttons during load
+    if (sliderButtons) sliderButtons.style.display = 'none';
+  
+    let fetchUrl;
+  
+    if (handle === 'all') {
+      fetchUrl = '/collections/all?view=ajax-products';
+    } else {
+      fetchUrl = `/collections/${handle}?view=ajax-products`;
+    }
+  
+    fetch(fetchUrl)
+      .then((res) => res.text())
+      .then((html) => {
+        // Extract just the product grid from the response
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const newProductGrid = doc.querySelector('ul[class*="product-grid"]');
         
-          alert('you complete the mouse over effect')
+        if (newProductGrid) {
+          productList.innerHTML = newProductGrid.innerHTML;
+          
+          // Re-initialize any slider functionality if needed
+          if (typeof window.SliderComponent !== 'undefined') {
+            new window.SliderComponent(sliderComponent);
+          }
+        } else {
+          productList.innerHTML = '<p>No products found.</p>';
         }
-      }
-    });
+      })
+      .catch((err) => {
+        console.error('Error fetching products:', err);
+        productList.innerHTML = '<p>Failed to load products.</p>';
+      });
+  });
   });
 </script>
 
