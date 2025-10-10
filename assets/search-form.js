@@ -1,3 +1,13 @@
+// Add this at the top
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+}
+
 class SearchForm extends HTMLElement {
   constructor() {
     super();
@@ -5,9 +15,9 @@ class SearchForm extends HTMLElement {
     this.resetButton = this.querySelector('button[type="reset"]');
 
     if (this.input) {
-      this.input.form.addEventListener('reset', this.onFormReset.bind(this));
+      this.input.form.addEventListener("reset", this.onFormReset.bind(this));
       this.input.addEventListener(
-        'input',
+        "input",
         debounce((event) => {
           this.onChange(event);
         }, 300).bind(this)
@@ -16,11 +26,11 @@ class SearchForm extends HTMLElement {
   }
 
   toggleResetButton() {
-    const resetIsHidden = this.resetButton.classList.contains('hidden');
+    const resetIsHidden = this.resetButton.classList.contains("hidden");
     if (this.input.value.length > 0 && resetIsHidden) {
-      this.resetButton.classList.remove('hidden');
+      this.resetButton.classList.remove("hidden");
     } else if (this.input.value.length === 0 && !resetIsHidden) {
-      this.resetButton.classList.add('hidden');
+      this.resetButton.classList.add("hidden");
     }
   }
 
@@ -33,15 +43,13 @@ class SearchForm extends HTMLElement {
   }
 
   onFormReset(event) {
-    // Prevent default so the form reset doesn't set the value gotten from the url on page load
     event.preventDefault();
-    // Don't reset if the user has selected an element on the predictive search dropdown
     if (this.shouldResetForm()) {
-      this.input.value = '';
+      this.input.value = "";
       this.input.focus();
       this.toggleResetButton();
     }
   }
 }
 
-customElements.define('search-form', SearchForm);
+customElements.define("search-form", SearchForm);

@@ -1,14 +1,6 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   new Swiper(".mySwiper", {
-//     loop: true,
-//     autoplay: { delay: 3000 },
-//     pagination: { el: ".swiper-pagination", clickable: true },
-//     navigation: {
-//       nextEl: ".swiper-button-next",
-//       prevEl: ".swiper-button-prev",
-//     },
-//   });
-// });
+console.log("Swiper is:", typeof Swiper);
+
+/* global Swiper */
 
 document.addEventListener("DOMContentLoaded", function () {
   // Select all sliders on the page
@@ -17,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loop = swiperEl.dataset.loop === "true"; // true or false
     const autoplayEnabled = swiperEl.dataset.autoplay === "true"; // true or false
     const autoplaydelay = parseInt(swiperEl.dataset.speed, 10) || 5000; // fallback 5000ms
-    const animationspeed = 1000; // fallback 5000ms
+    const animationspeed = 1000; // fallback 1000ms
 
     // Initialize Swiper
     new Swiper(swiperEl, {

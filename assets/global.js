@@ -1631,3 +1631,5 @@ class CartPerformance {
     performance.measure(metricName, `${metricName}:start`, `${metricName}:end`);
   }
 }
+
+export { trapFocus, removeTrapFocus };
