@@ -37,13 +37,16 @@
 
     {% render 'meta-tags' %}
 
+    <!-- Load global libraries first -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
-    <script type="module" src="{{ 'global.js' | asset_url }}"></script>
-    <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-    <script type="module" src="{{ 'details-modal.js' | asset_url }}"></script>
-    <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'constants.js' | asset_url }}" defer></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer></script>
+
+    <!-- Your global scripts -->
+    <script src="{{ 'global.js' | asset_url }}" type="module"></script>
+    <script src="{{ 'details-modal.js' | asset_url }}" type="module"></script>
+    <script src="{{ 'details-disclosure.js' | asset_url }}" defer></script>
+    <script src="{{ 'search-form.js' | asset_url }}" defer></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
