@@ -45,7 +45,7 @@
     <div
       id="card-featured"
       class="
-        card card--{{ settings.card_style }}
+        card card-one card--{{ settings.card_style }}
         {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
         {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
         {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
@@ -128,6 +128,13 @@
         {% comment %} {%- if card_product.tags contains "NEW" -%}
         {%- endif -%} {% endcomment %}
         <div class="card__badge card__badge--new"><p>NEW</p></div>
+
+        {% if card_product.compare_at_price > card_product.price %}
+          {% assign discount = card_product.compare_at_price | minus: card_product.price | times: 100 | divided_by: card_product.compare_at_price %}
+          <div class="discount-badge">
+            {{ discount | round }}% OFF
+          </div>
+        {% endif %}
 
         <div class="card__content">
           <div class="card__information">

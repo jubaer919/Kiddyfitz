@@ -235,6 +235,11 @@
   text-align: center;
 }
 
+#card-featured.card-one {
+  border-radius: 3rem !important;
+  overflow: hidden !important;
+}
+
 .card__inner {
   height: 70%;
   overflow: hidden;
@@ -287,6 +292,18 @@
   letter-spacing: 0.8;
 }
 
+.discount-badge {
+  position: absolute;
+  left: 1.5rem;
+  top: 8rem;
+  background-color: #ffc0cb;
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 1px 8px;
+  border-radius: 3rem;
+}
+
 .price-container {
   text-align: left;
   margin: 0 1.5rem;
@@ -314,10 +331,13 @@
   font-weight: 600;
 }
 
-.price-compare {
+.price-container .price-compare,
+.price-container .price-compare.money-sign {
   margin-left: 10px;
   text-decoration: line-through;
   font-size: 14px;
+  font-weight: bold;
+  color: #777;
 }
 
 .add-to-cart-one {
