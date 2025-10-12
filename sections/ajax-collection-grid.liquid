@@ -23,7 +23,7 @@
   aria-label="{{ 'general.slider.name' | t }}">
   {%- for product in collection.products limit: section.settings.products_to_show -%}
     <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}">
-      {% render 'card-product'
+      {% render 'card-one'
         ,
  card_product: product
         ,
