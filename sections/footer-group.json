@@ -27,10 +27,17 @@
             "menu": "footer"
           }
         },
-        "text_QQKwEd": {
+        "link_list_EantmG": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Help Service",
+            "menu": "footer"
+          }
+        },
+        "text_93pxqK": {
           "type": "text",
           "settings": {
-            "heading": "Heading",
+            "heading": "Payment Methods",
             "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
           }
         }
@@ -38,7 +45,8 @@
       "block_order": [
         "brand_information_AzGPid",
         "link_list_mb36tY",
-        "text_QQKwEd"
+        "link_list_EantmG",
+        "text_93pxqK"
       ],
       "settings": {
         "color_scheme": "scheme-ecd63533-e56e-41e0-bb94-50b1f5f395cb",
