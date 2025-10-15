@@ -14,6 +14,12 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "brand_information_AzGPid": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
         "link_list_mb36tY": {
           "type": "link_list",
           "settings": {
@@ -21,16 +27,18 @@
             "menu": "footer"
           }
         },
-        "brand_information_AzGPid": {
-          "type": "brand_information",
+        "text_QQKwEd": {
+          "type": "text",
           "settings": {
-            "show_social": true
+            "heading": "Heading",
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
           }
         }
       },
       "block_order": [
+        "brand_information_AzGPid",
         "link_list_mb36tY",
-        "brand_information_AzGPid"
+        "text_QQKwEd"
       ],
       "settings": {
         "color_scheme": "scheme-ecd63533-e56e-41e0-bb94-50b1f5f395cb",
