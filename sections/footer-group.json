@@ -38,7 +38,7 @@
           "type": "text",
           "settings": {
             "heading": "Payment Methods",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
+            "subtext": ""
           }
         }
       },
@@ -50,6 +50,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-ecd63533-e56e-41e0-bb94-50b1f5f395cb",
+        "corporate_address": "123 Main Street, Dhaka, Bangladesh",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,
