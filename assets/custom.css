@@ -393,6 +393,96 @@
   border-radius: 3rem;
 }
 
+.brand-address h4,
+.brand-address p {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.brand-address-connect {
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.link.link-featured {
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
+}
+
+.link.link-featured:hover {
+  text-decoration: none !important;
+  transform: translateX(0);
+  color: rgb(110, 238, 110) !important;
+}
+
+.link.link-featured span {
+  opacity: 0;
+  margin-right: 5px;
+}
+
+.payment-icon:hover {
+  filter: grayscale(0%) brightness(100%);
+}
+
+.link.link-featured:hover span {
+  opacity: 1;
+  text-decoration: none !important;
+  color: red;
+}
+
+.footer__payment-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+/* 🔹 Default icon look */
+.payment-icon-wrapper {
+  background: #fff;
+  width: 52px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.payment-icon-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.payment-icon {
+  width: 28px;
+  height: auto;
+  display: block;
+}
+
+/* 🔹 Full-width icons (cash & installment) */
+.payment-icon-wrapper.full {
+  flex: 1 1 100%;
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+.payment-icon-wrapper.full .payment-icon {
+  width: 30px;
+}
+
 .icon-container {
   position: absolute;
   left: 1.5rem;

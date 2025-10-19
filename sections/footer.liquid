@@ -84,6 +84,32 @@
                     {% render block %}
                   {%- when 'text' -%}
                     <div class="footer-block__details-content rte">
+                      <div class="footer__payment-icons">
+                        <div class="payment-icon-wrapper full">
+                          <img src="{{ 'icon-cash.svg' | asset_url }}" alt="Cash on Delivery" class="payment-icon">
+                          <span>Cash on Delivery</span>
+                        </div>
+
+                        <div class="payment-icon-wrapper full">
+                          <img src="{{ 'icon-calender.svg' | asset_url }}" alt="Installment" class="payment-icon">
+                          <span>Buy with Installment</span>
+                        </div>
+
+                        <div class="payment-icon-wrapper">
+                          <img src="{{ 'icon-visa.svg' | asset_url }}" alt="Visa" class="payment-icon">
+                        </div>
+                        <div class="payment-icon-wrapper">
+                          <img src="{{ 'icon-mastercard.svg' | asset_url }}" alt="Visa" class="payment-icon">
+                        </div>
+                        <div class="payment-icon-wrapper">
+                          <img src="{{ 'icon-paypal.svg' | asset_url }}" alt="PayPal" class="payment-icon">
+                        </div>
+                        <div class="payment-icon-wrapper">
+                          <img src="{{ 'icon-venmo.svg' | asset_url }}" alt="Venmo" class="payment-icon">
+                        </div>
+                      </div>
+                    </div>
+
                       {{ block.settings.subtext }}
                     </div>
                   {%- when 'link_list' -%}
@@ -93,9 +119,9 @@
                           <li>
                             <a
                               href="{{ link.url }}"
-                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                              class="link link-featured link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
                             >
-                              {{ link.title | escape }}
+                              <span>></span> {{ link.title | escape }}
                             </a>
                           </li>
                         {%- endfor -%}
@@ -103,10 +129,33 @@
                     {%- endif -%}
                   {%- when 'brand_information' -%}
                     <div class="footer-block__brand-info">
+                      <div>
+                        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset shop-name">
+                          {%- if settings.logo != blank -%}
+                            <div class="header__heading-logo-wrapper">
+                              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+                              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+                              {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+                              {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                              {{
+                                settings.logo | image_url: width: 600 | image_tag: class: 'header__heading-logo motion-reduce', widths: widths, height: logo_height, width: settings.logo_width, alt: logo_alt, sizes: sizes, preload: true
+                              }}
+                            </div>
+                          {%- else -%}
+                            <span class="h2">{{ shop.name }}</span>
+                          {%- endif -%}
+                        </a>
+                      </div>
+                      <div class="brand-address">
+                        <h4>Corporate Address</h4>
+                        <p>{{ settings.corporate_address }}</p>
+                        <p>Phone: +880 1234 567890</p>
+                      </div>
+                      <p class="brand-address-connect">Connect with Us</p>
                       {%- if settings.brand_image != blank -%}
                         {%- assign brand_image_height = settings.brand_image_width
                           | divided_by: settings.brand_image.aspect_ratio
-                        -%}
+                        -%}                       
                         <div
                           class="footer-block__image-wrapper"
                           style="max-width: min(100%, {{ settings.brand_image_width }}px);"
@@ -116,7 +165,7 @@
                             | image_url: width: 1100
                             | image_tag:
                               loading: 'lazy',
-                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
+                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1500',
                               height: brand_image_height,
                               width: settings.brand_image_width
                           }}
@@ -429,6 +478,12 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "corporate_address",
+      "default": "123 Main Street, Dhaka, Bangladesh",
+      "label": "Corporate address"
     },
     {
       "type": "header",
