@@ -18,14 +18,14 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
-<div class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}">
+<div class="utility-bar announcement-bar-featured color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}">
   <div>
     <img
       src="{{ 'icon-shirt.svg' | asset_url }}"
       alt="shirt"
       class="payment-icon">
   </div>
-  <div class="page-width border-red utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
+  <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
 
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
@@ -163,7 +163,7 @@
       <ul class="list-menu list-menu--inline" role="list">
         {%- for link in section.settings.menu.links -%}
           <li>
-            <a href="{{ link.url }}" class="header__menu-item list-menu__item link{% if link.active %} list-menu__item--active{% endif %}">
+            <a href="{{ link.url }}" class="header__menu-item announcement-bar-featured-item list-menu__item link{% if link.active %} list-menu__item--active{% endif %}">
               {{ link.title }}
             </a>
           </li>

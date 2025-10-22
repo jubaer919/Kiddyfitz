@@ -534,6 +534,24 @@
   z-index: 30;
 }
 
+.announcement-bar-featured {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5rem;
+}
+
+.announcement-bar-featured-item {
+  border-right: 1px solid black;
+  display: inline-block;
+  line-height: 1.2;
+  padding: 0.3rem 1rem;
+}
+
+.list-menu--inline li:last-child .announcement-bar-featured-item {
+  border: none;
+}
+
 #card-featured:hover .icon-container {
   opacity: 1;
   transform: translateY(0);
