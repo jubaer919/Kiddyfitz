@@ -534,6 +534,10 @@
   z-index: 30;
 }
 
+#wishlist-icon svg {
+  fill: black !important;
+}
+
 .announcement-bar-featured {
   display: flex;
   justify-content: space-between;
