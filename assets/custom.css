@@ -857,3 +857,17 @@
     font-size: 12px;
   }
 }
+
+.collection-hero__image-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid red;
+}
+
+.collection-hero__image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+  border: 1px solid red !important;
+}
