@@ -691,7 +691,7 @@
 
 .collection__view-all-featured {
   margin-top: 2rem;
-  margin-bottom: 6rem;
+  margin-bottom: 8rem;
 }
 
 .view_all-featured {
@@ -704,29 +704,29 @@
 
 .footer {
   position: relative;
-  padding-top: 6rem;
+  padding-top: 8rem;
 }
 
 .footer__content-top {
-  margin-top: 5rem;
+  margin-top: 8rem;
 }
 
 .footer-block--newsletter-featured {
   position: absolute;
-  top: -85px;
+  top: -100px;
   left: 10%;
   width: 80%;
   max-width: 1100px;
-  background-color: #6a7381;
+  background-color: white;
   border-radius: 12px;
   padding: 2.5rem 2rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 2rem;
   color: #fff;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  z-index: 2;
 }
 
 /* Make all 3 main children take equal space */
@@ -737,6 +737,10 @@
 /* Center text inside the heading */
 .newsletter-heading {
   text-align: left;
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
 /* Make the form centered and clean */
@@ -751,11 +755,11 @@
   width: 100%;
 }
 
-.field__input {
+.field__input-featured {
   flex: 1;
+  align-self: flex-start;
   padding: 0.8rem 1rem;
-  border: none;
-  border-radius: 6px 0 0 6px;
+  border: 1px solid black;
 }
 
 .newsletter-form__button {
@@ -777,6 +781,7 @@
 .newsletter-heading p {
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
 .field {
@@ -809,4 +814,46 @@
 
 .field__label {
   display: none !important;
+}
+
+.footer-block__newsletter * > input,
+.footer-block__newsletter * > input:focus {
+  outline: none !important;
+}
+
+.footer-block__newsletter h2,
+.footer-block__newsletter p {
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-block__newsletter h2 {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.footer-block__newsletter p {
+  line-height: 1;
+  font-size: 14px;
+  margin: 1rem 0 0.8rem 0;
+}
+
+@media (max-width: 768px) {
+  .newsletter-heading {
+    display: none;
+  }
+
+  .footer-block__newsletter h2,
+  .footer-block__newsletter p {
+    text-align: left;
+  }
+
+  .footer-block__newsletter h2 {
+    font-size: 18px;
+  }
+
+  .footer-block__newsletter p {
+    font-size: 12px;
+  }
 }

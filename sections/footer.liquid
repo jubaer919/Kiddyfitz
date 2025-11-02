@@ -224,15 +224,19 @@
           </div>
           {%- if section.settings.newsletter_enable -%}
             <div class="footer-block__newsletter">
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%} 
                 <input type="hidden" name="contact[tags]" value="newsletter">
-                <div class="newsletter-form__field-wrapper">
+                <div class="">
+                  {%- if section.settings.newsletter_heading != blank -%}
+                    <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+                    <p>{{section.settings.newsletter_paragrap}}</p>
+                  {%- endif -%}
                   <div class="field">
                     <input
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
                       name="contact[email]"
-                      class="field__input"
+                      class="field__input-featured"
                       value="{{ form.email }}"
                       aria-required="true"
                       autocorrect="off"
@@ -294,10 +298,6 @@
             <div class="footer__follow-on-shop">
               {{ shop | login_button: action: 'follow' }}
             </div>
-          {%- endif -%}
-
-          {%- if section.settings.show_social and has_social_icons -%}
-            {%- render 'social-icons', class: 'footer__list-social' -%}
           {%- endif -%}
         </div>
       </div> 
@@ -485,6 +485,12 @@
       "id": "newsletter_heading",
       "default": "t:sections.footer.settings.newsletter_heading.default",
       "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "newsletter_paragrap",
+      "default": "Subscribe our newsletter for get notification about information discount",
+      "label": "Newsletter Heading"
     },
     {
       "type": "header",
