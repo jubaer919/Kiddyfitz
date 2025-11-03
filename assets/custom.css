@@ -236,7 +236,7 @@
 }
 
 #card-featured.card-one {
-  border-radius: 3rem !important;
+  border-radius: 1rem !important;
   overflow: hidden !important;
 }
 
@@ -897,4 +897,21 @@
   font-weight: bold;
   color: black;
   text-decoration: none;
+}
+
+.main-collection-featured {
+  margin-bottom: 6rem;
+  background-color: #d7d7d7;
+}
+
+.trusted-badge-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.trusted-badge-item {
+  flex: 1 1 20%; /* adjust for responsive */
+  text-align: center;
 }

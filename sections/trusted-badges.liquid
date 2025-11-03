@@ -1,0 +1,57 @@
+<div class="trusted-badge-section page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <div class="trusted-badge-wrapper">
+    {% for block in section.blocks %}
+      <div>
+        {% if block.settings.icon %}
+          <img
+            src="{{ block.settings.icon | image_url: width: 80 }}"
+            width="80"
+            height="80"
+            alt="{{ block.settings.title }}"
+            class="trusted-badge-icon"
+            loading="lazy">
+        {% endif %}
+        <h3 class="trusted-badge-title">{{ block.settings.title }}</h3>
+        <p class="trusted-badge-subtitle">{{ block.settings.subtitle }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Trusted Badges",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "badge",
+        "name": "Badge",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Badge Icon"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Badge Title",
+            "default": "Free Shipping"
+          }, {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Badge Subtitle",
+            "default": "For selected products"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 4,
+    "presets": [
+      {
+        "name": "Trusted Badges",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}

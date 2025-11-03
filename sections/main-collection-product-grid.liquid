@@ -37,7 +37,7 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+<div class="main-collection-featured section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
@@ -76,14 +76,11 @@
             <h2 class="product-count__text text-body">
               <span id="ProductCountDesktop">
                 {%- if collection.results_count -%}
-                  {{ 'templates.search.results_with_count'
- | t: terms: collection.terms, count: collection.results_count
-                  }}
+                  {{ 'templates.search.results_with_count' | t: terms: collection.terms, count: collection.results_count }}
                 {%- elsif collection.products_count == collection.all_products_count -%}
                   {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
                 {%- else -%}
-                  {{ 'products.facets.product_count'
- | t: product_count: collection.products_count, count: collection.all_products_count
+                  {{ 'products.facets.product_count' | t: product_count: collection.products_count, count: collection.all_products_count
                   }}
                 {%- endif -%}
               </span>
@@ -100,7 +97,7 @@
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <aside
           aria-labelledby="verticalTitle"
-          class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+          class="border-red facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
           id="main-collection-filters"
           data-id="{{ section.id }}">
           {% render 'facets'
@@ -134,9 +131,7 @@
               <h2 class="title title--primary">
                 {{ 'sections.collection_template.empty' | t -}}
                 <br>
-                {{ 'sections.collection_template.use_fewer_filters_html'
- | t: link: collection.url, class: 'underlined-link link'
-                }}
+                {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: 'underlined-link link' }}
               </h2>
             </div>
           </div>
@@ -163,7 +158,7 @@
                   data-cascade
                   style="--animation-order: {{ forloop.index }};"
                   {% endif %}>
-                  {% render 'card-product'
+                  {% render 'card-one'
                     ,
  card_product: product
                     ,
