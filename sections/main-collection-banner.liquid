@@ -9,8 +9,8 @@
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient" style="{% if collection.image %}background-image: url('{{ collection.image | image_url: width: 1500 }}');{% else %} background-image: url('{{ 'default-image.jpg' | file_url }}');{% endif %} background-size: cover; background-position: center;background-repeat: no-repeat;">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient" style="{% if collection.image %}background-image: url('{{ collection.image | image_url: width: 1500 }}');{% else %} background-image: url('{{ 'default-image.jpg' | asset_url }}');{% endif %}">
+  <div class="collection-hero__inner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <nav class="collection-breadcrumb">
       <a href="{{ routes.root_url }}">Home</a>
       {% if collection.url contains '/boy' %}
@@ -32,7 +32,9 @@
       </h1>
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        <div class="collection-hero__description rte">
+          <p>{{ collection.description }}</p>
+        </div>
       {%- endif -%}
     </div>
   </div>
