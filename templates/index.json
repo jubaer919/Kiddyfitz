@@ -188,10 +188,18 @@
             "icon": "shopify://shop_images/coin-dollar.svg",
             "title": "Boy Shirt"
           }
+        },
+        "category_GLXXrD": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/lifebuoy.svg",
+            "title": "Boy Pant"
+          }
         }
       },
       "block_order": [
-        "category_iemjGT"
+        "category_iemjGT",
+        "category_GLXXrD"
       ],
       "name": "Shop by Category",
       "settings": {}
