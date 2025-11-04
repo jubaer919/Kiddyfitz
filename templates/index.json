@@ -210,8 +210,8 @@
           "type": "category",
           "settings": {
             "icon": "shopify://shop_images/lifebuoy.svg",
-            "title": "Girl T-shirt",
-            "link": "shopify://collections/girl-t-shirt"
+            "title": "Boy T-Shirt",
+            "link": "shopify://collections/boy-t-shirt"
           }
         }
       },
