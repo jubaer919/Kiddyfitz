@@ -197,11 +197,20 @@
             "title": "Boy Pant",
             "link": "shopify://collections/boy-pants"
           }
+        },
+        "category_D4tNPY": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/loop2.svg",
+            "title": "Girl Shirt",
+            "link": "shopify://collections/girl-frog"
+          }
         }
       },
       "block_order": [
         "category_nb4M4c",
-        "category_nyNGbf"
+        "category_nyNGbf",
+        "category_D4tNPY"
       ],
       "name": "Shop by Category",
       "settings": {}
