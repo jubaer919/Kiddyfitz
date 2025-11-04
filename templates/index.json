@@ -213,13 +213,22 @@
             "title": "Boy T-Shirt",
             "link": "shopify://collections/boy-t-shirt"
           }
+        },
+        "category_4n78AV": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/loop2.svg",
+            "title": "Girl Frog",
+            "link": "shopify://collections/girl-frog"
+          }
         }
       },
       "block_order": [
         "category_nb4M4c",
         "category_nyNGbf",
         "category_D4tNPY",
-        "category_zgXjME"
+        "category_zgXjME",
+        "category_4n78AV"
       ],
       "name": "Shop by Category",
       "settings": {}
