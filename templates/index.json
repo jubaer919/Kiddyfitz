@@ -221,6 +221,14 @@
             "title": "Girl Frog",
             "link": "shopify://collections/girl-frog"
           }
+        },
+        "category_bLh9WM": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/local_shipping.svg",
+            "title": "Girl Three Pice",
+            "link": "shopify://collections/all"
+          }
         }
       },
       "block_order": [
@@ -228,7 +236,8 @@
         "category_nyNGbf",
         "category_D4tNPY",
         "category_zgXjME",
-        "category_4n78AV"
+        "category_4n78AV",
+        "category_bLh9WM"
       ],
       "name": "Shop by Category",
       "settings": {}
