@@ -210,8 +210,8 @@
           "type": "category",
           "settings": {
             "icon": "shopify://shop_images/lifebuoy.svg",
-            "title": "Boy T-Shart",
-            "link": "shopify://collections/boy-t-shirt"
+            "title": "Girl T-shirt",
+            "link": "shopify://collections/girl-t-shirt"
           }
         }
       },
