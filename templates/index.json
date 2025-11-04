@@ -112,12 +112,21 @@
             "title": "Secure Payment",
             "subtitle": "For selected products"
           }
+        },
+        "badge_LCNPWA": {
+          "type": "badge",
+          "settings": {
+            "icon": "shopify://shop_images/lifebuoy.svg",
+            "title": "7 Days Support",
+            "subtitle": "For selected products"
+          }
         }
       },
       "block_order": [
         "badge_VQwjeh",
         "badge_446Dcb",
-        "badge_wtDx4r"
+        "badge_wtDx4r",
+        "badge_LCNPWA"
       ],
       "name": "Trusted Badges",
       "settings": {}
