@@ -96,10 +96,19 @@
             "title": "Free Shipping",
             "subtitle": "For selected products"
           }
+        },
+        "badge_446Dcb": {
+          "type": "badge",
+          "settings": {
+            "icon": "shopify://shop_images/loop2.svg",
+            "title": "14 Days Return",
+            "subtitle": "For selected products"
+          }
         }
       },
       "block_order": [
-        "badge_VQwjeh"
+        "badge_VQwjeh",
+        "badge_446Dcb"
       ],
       "name": "Trusted Badges",
       "settings": {}
