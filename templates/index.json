@@ -104,11 +104,20 @@
             "title": "14 Days Return",
             "subtitle": "For selected products"
           }
+        },
+        "badge_wtDx4r": {
+          "type": "badge",
+          "settings": {
+            "icon": "shopify://shop_images/coin-dollar.svg",
+            "title": "Secure Payment",
+            "subtitle": "For selected products"
+          }
         }
       },
       "block_order": [
         "badge_VQwjeh",
-        "badge_446Dcb"
+        "badge_446Dcb",
+        "badge_wtDx4r"
       ],
       "name": "Trusted Badges",
       "settings": {}
