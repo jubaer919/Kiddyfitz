@@ -229,6 +229,14 @@
             "title": "Girl Three Pice",
             "link": "shopify://collections/all"
           }
+        },
+        "category_8AfJVk": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/coin-dollar.svg",
+            "title": "Girl Classic",
+            "link": "shopify://collections/all"
+          }
         }
       },
       "block_order": [
@@ -237,7 +245,8 @@
         "category_D4tNPY",
         "category_zgXjME",
         "category_4n78AV",
-        "category_bLh9WM"
+        "category_bLh9WM",
+        "category_8AfJVk"
       ],
       "name": "Shop by Category",
       "settings": {}
