@@ -1,5 +1,5 @@
-<div class="shop-by-category-section {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-  <h2>Shop by Category</h2>
+<div class="shop-by-category-section page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <h2 class="category-heading">Shop by Category</h2>
   <div class="category-list">
     {% for block in section.blocks %}
       <a href="{{ block.settings.link }}">

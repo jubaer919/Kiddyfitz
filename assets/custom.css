@@ -1007,4 +1007,51 @@
   .badge-container:nth-child(2n + 1) {
     border-left: none;
   }
+
+  /* Tablet: categories - 3 columns */
+  .category-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.category-list {
+  margin-bottom: 10rem;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.category-list a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  display: block;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.category-list a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-heading {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 4rem 0 4rem 0;
+}
+
+@media (max-width: 425px) {
+  /* Small mobile: categories - 2 columns per row */
+  .category-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
 }
