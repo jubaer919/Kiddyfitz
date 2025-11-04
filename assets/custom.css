@@ -957,3 +957,54 @@
   margin-top: 0.3rem;
   line-height: 1.2;
 }
+
+@media (max-width: 425px) {
+  .badge-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .badge-container:not(:first-child) {
+    border-left: none;
+    border-top: 1px solid #333;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  /* Tablet: keep wrapper as row, two columns per row */
+  .trusted-badge-wrapper {
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .badge-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    gap: 1rem;
+    padding: 1rem 1rem;
+    width: calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    box-sizing: border-box;
+    margin: 0;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Add a vertical separator between the two columns: even items get a left border */
+  .badge-container:nth-child(2n) {
+    border-left: 1px solid #333;
+  }
+
+  /* Ensure odd items don't keep a left border */
+  .badge-container:nth-child(2n + 1) {
+    border-left: none;
+  }
+}
