@@ -195,11 +195,19 @@
             "icon": "shopify://shop_images/lifebuoy.svg",
             "title": "Boy Pant"
           }
+        },
+        "category_i6ftQW": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/local_shipping.svg",
+            "title": "Boy Festive"
+          }
         }
       },
       "block_order": [
         "category_iemjGT",
-        "category_GLXXrD"
+        "category_GLXXrD",
+        "category_i6ftQW"
       ],
       "name": "Shop by Category",
       "settings": {}
