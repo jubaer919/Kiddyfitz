@@ -915,3 +915,45 @@
   flex: 1 1 20%; /* adjust for responsive */
   text-align: center;
 }
+
+.trusted-badge-section {
+  background-color: #e7e7e7;
+  margin: 4rem 1rem;
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.badge-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 1rem 1rem 3rem;
+}
+
+.badge-container:not(:first-child) {
+  border-left: 1px solid #333;
+}
+
+.trusted-badge-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.badge-description-container h3,
+.badge-description-container p {
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.badge-description-container h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.badge-description-container p {
+  font-size: 14px;
+  margin-top: 0.3rem;
+  line-height: 1.2;
+}
