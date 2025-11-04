@@ -1,0 +1,41 @@
+<div class="shop-by-category-section {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <h2>Shop by Category</h2>
+  <div class="category-list">
+    {% for block in section.blocks %}
+      <div class="category-item">
+        <img
+          src="{{ block.settings.icon | image_url: width: 60 }}"
+          alt="{{ block.settings.title }}"
+          width="60"
+          height="60"
+          loading="lazy">
+        <h3>{{ block.settings.title }}</h3>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Shop by Category",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "category",
+        "name": "Category",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Category Icon"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Category Title",
+            "default": "Boy Shirt"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
