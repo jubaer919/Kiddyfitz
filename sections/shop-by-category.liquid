@@ -2,15 +2,17 @@
   <h2>Shop by Category</h2>
   <div class="category-list">
     {% for block in section.blocks %}
-      <div class="category-item">
-        <img
-          src="{{ block.settings.icon | image_url: width: 60 }}"
-          alt="{{ block.settings.title }}"
-          width="60"
-          height="60"
-          loading="lazy">
-        <h3>{{ block.settings.title }}</h3>
-      </div>
+      <a href="{{ block.settings.link }}">
+        <div class="category-item">
+          <img
+            src="{{ block.settings.icon | image_url: width: 60 }}"
+            alt="{{ block.settings.title }}"
+            width="60"
+            height="60"
+            loading="lazy">
+          <h3>{{ block.settings.title }}</h3>
+        </div>
+      </a>
     {% endfor %}
   </div>
 </div>
@@ -33,6 +35,11 @@
             "id": "title",
             "label": "Category Title",
             "default": "Boy Shirt"
+          }, {
+            "type": "url",
+            "id": "link",
+            "label": "Category Link",
+            "default": "/collections/all"
           }
         ]
       }
