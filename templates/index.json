@@ -189,10 +189,19 @@
             "title": "Boy Shirt",
             "link": "shopify://collections/boy-shirt"
           }
+        },
+        "category_nyNGbf": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/lifebuoy.svg",
+            "title": "Boy Pant",
+            "link": "shopify://collections/boy-pants"
+          }
         }
       },
       "block_order": [
-        "category_nb4M4c"
+        "category_nb4M4c",
+        "category_nyNGbf"
       ],
       "name": "Shop by Category",
       "settings": {}
