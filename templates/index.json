@@ -205,12 +205,21 @@
             "title": "Girl Shirt",
             "link": "shopify://collections/girl-frog"
           }
+        },
+        "category_zgXjME": {
+          "type": "category",
+          "settings": {
+            "icon": "shopify://shop_images/lifebuoy.svg",
+            "title": "Boy T-Shart",
+            "link": "shopify://collections/boy-t-shirt"
+          }
         }
       },
       "block_order": [
         "category_nb4M4c",
         "category_nyNGbf",
-        "category_D4tNPY"
+        "category_D4tNPY",
+        "category_zgXjME"
       ],
       "name": "Shop by Category",
       "settings": {}
