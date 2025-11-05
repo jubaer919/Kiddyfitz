@@ -269,11 +269,20 @@
             "author": "Shon Tae",
             "quote": "This is an amazing product! Highly recommended."
           }
+        },
+        "testimonial_6Pc67y": {
+          "type": "testimonial",
+          "settings": {
+            "profile": "shopify://shop_images/pexels-pavel-danilyuk-8421909.jpg",
+            "author": "King Batch",
+            "quote": "This is an amazing product! Highly recommended."
+          }
         }
       },
       "block_order": [
         "testimonial_qaUmiH",
-        "testimonial_68pBef"
+        "testimonial_68pBef",
+        "testimonial_6Pc67y"
       ],
       "name": "Testimonial Slider",
       "settings": {}
