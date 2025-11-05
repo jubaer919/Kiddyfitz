@@ -261,10 +261,19 @@
             "author": "John Doe",
             "quote": "This is an amazing product! Highly recommended."
           }
+        },
+        "testimonial_68pBef": {
+          "type": "testimonial",
+          "settings": {
+            "profile": "shopify://shop_images/with-mockup.jpg",
+            "author": "Shon Tae",
+            "quote": "This is an amazing product! Highly recommended."
+          }
         }
       },
       "block_order": [
-        "testimonial_qaUmiH"
+        "testimonial_qaUmiH",
+        "testimonial_68pBef"
       ],
       "name": "Testimonial Slider",
       "settings": {}
