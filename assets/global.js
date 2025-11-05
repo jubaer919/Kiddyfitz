@@ -3,8 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const swiperSections = document.querySelectorAll('[id^="swiper-slideshow-"]');
 
   swiperSections.forEach((section) => {
-    const container = section.querySelector(".swiper-container");
-    alert("this code is running");
+    // Support several possible slider container class names used across sections
+    const container =
+      section.querySelector(".swiper-container") ||
+      section.querySelector(".mySwiper") ||
+      section.querySelector(".swiper");
+
+    // If no container found, skip this section (prevents runtime errors)
+    if (!container) return;
 
     const loop = container.dataset.loop === "true";
     const autoplayEnabled = container.dataset.autoplay === "true";
@@ -26,14 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
         : false,
       navigation: showArrows
         ? {
-            nextEl: section.querySelector(".swiper-button-next"),
-            prevEl: section.querySelector(".swiper-button-prev"),
+            nextEl: container.querySelector(".swiper-button-next"),
+            prevEl: container.querySelector(".swiper-button-prev"),
           }
         : false,
       pagination:
         sliderVisual === "dots"
           ? {
-              el: section.querySelector(".swiper-pagination"),
+              el: container.querySelector(".swiper-pagination"),
               clickable: true,
             }
           : false,

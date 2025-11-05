@@ -212,7 +212,7 @@
           <a href="/collections/all" class="footer__custom-button"><img src="{{ 'icon-map-pin.svg' | asset_url }}" alt="Visa" class="payment-icon"><span>Store & Servise Location </span></a>
         </div>
 
-        <div
+        {% comment %} <div
           class="footer-block--newsletter footer-block--newsletter-featured{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
@@ -299,7 +299,7 @@
               {{ shop | login_button: action: 'follow' }}
             </div>
           {%- endif -%}
-        </div>
+        </div> {% endcomment %}
       </div> 
     {%- endunless -%}
   {%- endif -%}

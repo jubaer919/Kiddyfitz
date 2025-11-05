@@ -1,4 +1,5 @@
-<div class="testimonial-slider swiper">
+<div class="testimonial-slider swiper swiper-wrapper-featured">
+  <h2 class="testimonial-slider-heading">Customer Testimonials</h2>
   <div class="swiper-wrapper">
     {% for block in section.blocks %}
       <div class="testimonial-slide swiper-slide">
@@ -21,7 +22,156 @@
       </div>
     {% endfor %}
   </div>
+
+  <!-- Swiper Controls -->
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev" aria-label="Previous slide">
+    <!-- simple chevron SVG to ensure the icon is visible regardless of external CSS injection -->
+    <svg
+      class="swiper-navigation-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      aria-hidden="true">
+      <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" fill="currentColor" />
+    </svg>
+  </div>
+  <div class="swiper-button-next" aria-label="Next slide">
+    <svg
+      class="swiper-navigation-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      aria-hidden="true">
+      <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" fill="currentColor" />
+    </svg>
+  </div>
 </div>
+
+<style>
+  .testimonial-slider-heading {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 4rem;
+  }
+  .swiper-wrapper-featured {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .testimonial-card {
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author img {
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-card h3 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+  .testimonial-card blockquote {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Swiper adjustments */
+  .testimonial-slider {
+    position: relative;
+    width: 100%;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #333;
+  }
+
+  .swiper-pagination-bullet {
+    background: #333;
+    opacity: 0.5;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Initialize Swiper when DOM is ready
+  document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.querySelector(".testimonial-slider");
+  
+    if (slider && typeof Swiper !== "undefined") {
+      new Swiper(slider, {
+        loop: true,
+        spaceBetween: 30,
+        slidesPerView: 1,
+        grabCursor: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: slider.querySelector(".swiper-button-next"),
+          prevEl: slider.querySelector(".swiper-button-prev"),
+        },
+      });
+    }
+  });
+  
+  // Reinitialize on Shopify section reload (Theme Editor)
+  document.addEventListener("shopify:section:load", function (event) {
+    const section = event.target;
+    const slider = section.querySelector(".testimonial-slider");
+  
+    if (slider && typeof Swiper !== "undefined") {
+      new Swiper(slider, {
+        loop: true,
+        spaceBetween: 30,
+        slidesPerView: 1,
+        grabCursor: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: slider.querySelector(".swiper-pagination"),
+          clickable: true,
+        },
+        navigation: {
+          nextEl: slider.querySelector(".swiper-button-next"),
+          prevEl: slider.querySelector(".swiper-button-prev"),
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        },
+      });
+    }
+  });
+</script>
 
 {% schema %}
   {
