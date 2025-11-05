@@ -1,0 +1,60 @@
+<div class="testimonial-slider swiper">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="testimonial-slide swiper-slide">
+        <div class="testimonial-card">
+          <div class="testimonial-author">
+            {% if block.settings.profile %}
+              <img
+                src="{{ block.settings.profile | image_url: width: 80 }}"
+                alt="{{ block.settings.author }}"
+                width="80"
+                height="80"
+                loading="lazy">
+            {% endif %}
+            <h3>{{ block.settings.author }}</h3>
+          </div>
+          <blockquote>
+            “{{ block.settings.quote }}”
+          </blockquote>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonial Slider",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "profile",
+            "label": "Profile Image"
+          }, {
+            "type": "text",
+            "id": "author",
+            "label": "Author Name",
+            "default": "John Doe"
+          }, {
+            "type": "textarea",
+            "id": "quote",
+            "label": "Testimonial Text",
+            "default": "This is an amazing product! Highly recommended."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonial Slider",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}
