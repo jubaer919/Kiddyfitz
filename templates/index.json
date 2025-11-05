@@ -250,12 +250,31 @@
       ],
       "name": "Shop by Category",
       "settings": {}
+    },
+    "testimonial_slider_HKztCx": {
+      "type": "testimonial-slider",
+      "blocks": {
+        "testimonial_qaUmiH": {
+          "type": "testimonial",
+          "settings": {
+            "profile": "shopify://shop_images/pexels-ron-lach-9511977.jpg",
+            "author": "John Doe",
+            "quote": "This is an amazing product! Highly recommended."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_qaUmiH"
+      ],
+      "name": "Testimonial Slider",
+      "settings": {}
     }
   },
   "order": [
     "swiper_slideshow_ByWUb7",
     "trusted_badges_N9WxtK",
     "featured_collection",
-    "shop_by_category_EJyECw"
+    "shop_by_category_EJyECw",
+    "testimonial_slider_HKztCx"
   ]
 }
