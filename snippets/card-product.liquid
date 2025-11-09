@@ -45,7 +45,7 @@
     <div
       id="card-featured"
       class="
-        card card--{{ settings.card_style }}
+        card card-one card--{{ settings.card_style }}
         {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
         {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
         {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
@@ -56,7 +56,7 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div
-        class="custom-hover_effect card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
+        class="custom-hover_effect card__inner card__inner-one {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if card_product.featured_media -%}
@@ -109,45 +109,26 @@
           </div>
         {%- endif -%}
 
-        <div class="icon-container" role="group" aria-label="Product actions">
-          <!-- View / product details -->
-          <div class="icon-holder">
-            <a href="{{ card_product.url }}" class="icon-link icon-view" title="{{ 'products.product.view' | t }}">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icon icon-eye" width="22" height="22">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              <span class="visually-hidden">{{ 'products.product.view' | t }}</span>
-            </a>
-          </div>
+        <div class="icon-container-one" role="group" aria-label="Product actions">
           <!-- Wishlist (client-side, localStorage) -->
-          <div class="icon-holder">
+          <div class="icon-holder-one">
             <button type="button"
-                    class="icon-link icon-wishlist"
+                    class="icon-link-one icon-wishlist icon-link-product"
                     data-product-id="{{ card_product.id }}"
                     aria-pressed="false"
                     title="Add to wishlist">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icon icon-heart" width="22" height="22">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-heart" width="22" height="22">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
               <span class="visually-hidden">Add to wishlist</span>
             </button>
           </div>
-          <!-- Add to Cart (AJAX) -->
-          <div class="icon-holder">
-            <button type="button"
-                    class="icon-link icon-cart"
-                    data-variant-id="{{ variant_id }}"
-                    title="Add to cart">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icon icon-cart" width="22" height="22">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>
-              <span class="visually-hidden">Add to cart</span>
-            </button>
-          </div>
         </div>
+
+        {% comment %} {%- if card_product.tags contains "NEW" -%}
+        {%- endif -%} {% endcomment %}
+        <div class="card__badge card__badge--new card__badge--featured"><p>NEW</p></div>
+
         <div class="card__content">
           <div class="card__information">
             <h3
@@ -161,10 +142,10 @@
           </div>
         </div>
       </div>
-      <div class="card__content card__content-featured">
+      <div class="card__content card__content-featured-one card__content-featured-product">
         <div class="card__information">
           <h3
-            class="heading__custom-design card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
+            class="heading__custom-design heading__custom-design-one heading__custom-design-featured card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_media or settings.card_style == 'card' %}
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
@@ -215,20 +196,34 @@
               </p>
             {%- endif -%}
 
-            {% assign moneySign = cart.currency.symbol %}
+            {% assign money_sign = cart.currency.symbol %}
             {% assign price = card_product.price | money_without_currency %}
-            {% assign comparePrice = card_product.compare_at_price | money_without_currency %}
+            {% assign compare_price = card_product.compare_at_price | money_without_currency %}
 
             <div class="price-container">
-              <p class="price-current">
-                <span class="money-sign">{{ moneySign }}</span> {{ price }}
+              <p class="price-current price-current-featured">
+                <span class="money-sign">{{ money_sign }}</span> {{ price }}
               </p>
 
-              {% if comparePrice > price %}
+              {% if compare_price > price %}
                 <p class="price-compare">
-                  <span class="money-sign">{{ moneySign }}</span> {{ comparePrice }}
+                  <span class="money-sign">{{ money_sign }}</span> {{ compare_price }}
                 </p>
               {% endif %}
+            </div>
+
+            <div class="control-tag control-tag-featured">
+              <div class="control-text">
+                <img src="{{ 'icon-star.svg' | asset_url }}" alt="Star Icon" width="16" height="16">
+                <img src="{{ 'icon-star.svg' | asset_url }}" alt="Star Icon" width="16" height="16">
+                <img src="{{ 'icon-star.svg' | asset_url }}" alt="Star Icon" width="16" height="16">
+              </div>
+              <form method="post" action="/cart/add" class="product-form add-to-cart-featured" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+                <button type="submit" class="button">
+                  Add to cart
+                </button>
+              </form>
             </div>
 
             {%- if card_product.quantity_price_breaks_configured? -%}

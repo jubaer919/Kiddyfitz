@@ -372,6 +372,29 @@
   font-weight: 600;
 }
 
+.control-tag.control-tag-featured {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.control-text {
+  font-size: 12px;
+  color: #777;
+  margin-left: 1.5rem;
+}
+
+.price-current.price-current-featured {
+  color: rgb(20, 19, 19);
+}
+
+.price-current.money-sign {
+  color: rgb(20, 19, 19);
+}
+
 .price-container .price-compare,
 .price-container .price-compare.money-sign {
   margin-left: 10px;
@@ -381,8 +404,20 @@
   color: #777;
 }
 
+.price-container .money-sign {
+  color: rgb(20, 19, 19);
+}
+
 .add-to-cart-one {
   margin: 1rem 1.5rem 0 1.5rem;
+}
+
+.add-to-cart-featured button {
+  background-color: rgb(20, 19, 19);
+  color: white;
+  padding: 5px 0.8rem;
+  border-radius: 5px;
+  margin-right: 1.5rem;
 }
 
 .add-to-cart-one button {
@@ -611,6 +646,10 @@
   cursor: pointer;
 }
 
+.icon-link-one.icon-link-product {
+  color: rgb(20, 19, 19);
+}
+
 .icon-link svg {
   width: 16px;
   height: 16px;
@@ -635,6 +674,14 @@
   z-index: 35;
 }
 
+.card__badge--new.card__badge--featured {
+  background-color: #a7a7a7;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  padding: 0 1rem;
+}
+
 .card__badge--new p {
   font-size: 14px;
   font-weight: bold;
@@ -643,13 +690,28 @@
   color: rgb(54, 6, 143);
 }
 
+.card__badge--new.card__badge--featured p {
+  color: white;
+}
+
 .card__content-featured-one {
   background-color: white;
   text-align: left;
 }
 
+.card__content-featured-product {
+  color: rgb(20, 19, 19);
+}
+
 .heading__custom-design-one {
   margin-left: 1.5rem;
+}
+
+.heading__custom-design-featured {
+  color: rgb(20, 19, 19);
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 1rem;
 }
 
 .collection-tabs {

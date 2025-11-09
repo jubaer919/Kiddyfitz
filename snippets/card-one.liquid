@@ -196,18 +196,18 @@
               </p>
             {%- endif -%}
 
-            {% assign moneySign = cart.currency.symbol %}
+            {% assign money_sign = cart.currency.symbol %}
             {% assign price = card_product.price | money_without_currency %}
-            {% assign comparePrice = card_product.compare_at_price | money_without_currency %}
+            {% assign compare_price = card_product.compare_at_price | money_without_currency %}
 
             <div class="price-container">
               <p class="price-current">
-                <span class="money-sign">{{ moneySign }}</span> {{ price }}
+                <span class="money-sign">{{ money_sign }}</span> {{ price }}
               </p>
 
-              {% if comparePrice > price %}
+              {% if compare_price > price %}
                 <p class="price-compare">
-                  <span class="money-sign">{{ moneySign }}</span> {{ comparePrice }}
+                  <span class="money-sign">{{ money_sign }}</span> {{ compare_price }}
                 </p>
               {% endif %}
             </div>
