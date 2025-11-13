@@ -17,7 +17,7 @@
         "text_WWCHRY": {
           "type": "text",
           "settings": {
-            "heading": "Heading",
+            "heading": "Payment Methods",
             "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
           }
         },
