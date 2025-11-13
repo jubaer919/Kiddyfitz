@@ -466,102 +466,6 @@
   color: red;
 }
 
-.footer__payment-icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  margin-top: 20px;
-}
-
-/* 🔹 Default icon look */
-.payment-icon-wrapper {
-  background: #fff;
-  width: 52px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.payment-icon-wrapper:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.payment-icon {
-  width: 28px;
-  height: auto;
-  display: block;
-}
-
-/* 🔹 Full-width icons (cash & installment) */
-.payment-icon-wrapper.full {
-  flex: 1 1 100%;
-  background: #fff;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-weight: 600;
-  font-size: 15px;
-  color: #333;
-}
-
-.payment-icon-wrapper.full .payment-icon {
-  width: 30px;
-}
-
-.icon-container {
-  position: absolute;
-  left: 1.5rem;
-  bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  z-index: 30;
-  pointer-events: auto;
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.footer__content-bottom {
-  display: none !important;
-}
-
-.footer__custom-button-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer__custom-button-wrapper a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  color: white;
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid white;
-  padding: 10px 20px;
-  border-radius: 3rem;
-}
-
-.footer__custom-button .payment-icon {
-  filter: brightness(0) invert(1);
-}
-
 .icon-container-one {
   position: absolute;
   right: 1.5rem;
@@ -762,162 +666,6 @@
   padding: 0.8rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.7);
   color: rgba(255, 255, 255, 0.7);
-}
-
-.footer {
-  position: relative;
-  padding-top: 8rem;
-}
-
-.footer__content-top {
-  margin-top: 8rem;
-}
-
-.footer-block--newsletter-featured {
-  position: absolute;
-  top: -100px;
-  left: 10%;
-  width: 80%;
-  max-width: 1100px;
-  background-color: white;
-  border-radius: 12px;
-  padding: 2.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-}
-
-/* Make all 3 main children take equal space */
-.footer-block--newsletter-featured > * {
-  flex: 1;
-}
-
-/* Center text inside the heading */
-.newsletter-heading {
-  text-align: left;
-  align-self: flex-start;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-
-/* Make the form centered and clean */
-.footer-block__newsletter {
-  display: flex;
-  justify-content: center;
-}
-
-/* Form input + button side by side */
-.newsletter-form__field-wrapper {
-  display: flex;
-  width: 100%;
-}
-
-.field__input-featured {
-  flex: 1;
-  align-self: flex-start;
-  padding: 0.8rem 1rem;
-  border: 1px solid black;
-}
-
-.newsletter-form__button {
-  padding: 0.8rem 1.2rem;
-  border: none;
-  border-radius: 0 6px 6px 0;
-  background: #333;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* Right side social icons centered */
-.footer__list-social {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.newsletter-heading h2,
-.newsletter-heading p {
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-
-.field {
-  border: none;
-  background-color: #6a7381;
-}
-
-.field__input {
-  border: none;
-  outline: none;
-  background-color: white;
-  color: #777;
-  border-radius: 0;
-}
-
-.newsletter-form__button.field__button {
-  width: 40%;
-  background-color: black !important;
-  outline: none;
-  border: none;
-  border-radius: 0;
-}
-
-.field__input::placeholder {
-  color: #777 !important; /* change this to any color */
-  font-size: 1rem;
-  font-style: italic;
-  letter-spacing: 0.5px;
-}
-
-.field__label {
-  display: none !important;
-}
-
-.footer-block__newsletter * > input,
-.footer-block__newsletter * > input:focus {
-  outline: none !important;
-}
-
-.footer-block__newsletter h2,
-.footer-block__newsletter p {
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-.footer-block__newsletter h2 {
-  font-size: 26px;
-  font-weight: 500;
-}
-
-.footer-block__newsletter p {
-  line-height: 1;
-  font-size: 14px;
-  margin: 1rem 0 0.8rem 0;
-}
-
-@media (max-width: 768px) {
-  .newsletter-heading {
-    display: none;
-  }
-
-  .footer-block__newsletter h2,
-  .footer-block__newsletter p {
-    text-align: left;
-  }
-
-  .footer-block__newsletter h2 {
-    font-size: 18px;
-  }
-
-  .footer-block__newsletter p {
-    font-size: 12px;
-  }
 }
 
 .collection-hero {
@@ -1123,4 +871,46 @@
   width: 60px;
   height: 60px;
   object-fit: cover;
+}
+
+.footer__content-top.page-width.footer-custom-layout {
+  padding-top: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.footer__blocks-wrapper {
+  flex: 0 0 70%;
+  max-width: 70%;
+}
+
+.footer-block--newsletter {
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+
+.footer-block--newsletter-featured {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0 !important;
+}
+
+.footer-block--newsletter-featured .footer__list-social {
+  align-self: flex-start;
+}
+
+/* Responsive tweak for mobile */
+@media screen and (max-width: 768px) {
+  .footer-custom-layout {
+    flex-direction: column;
+  }
+
+  .footer__blocks-wrapper,
+  .footer-block--newsletter {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
 }

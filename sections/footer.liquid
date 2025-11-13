@@ -49,7 +49,7 @@
     or section.settings.enable_follow_on_shop
   -%}
     {%- unless only_empty_brand -%}
-      <div class="footer__content-top page-width">
+      <div class="footer__content-top page-width footer-custom-layout">
         {%- if section.blocks.size > 0 -%}
           {%- liquid
             if section.blocks.size == 9
@@ -61,7 +61,7 @@
             endif
           -%}
           <div
-            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            class="border-red footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {% if settings.animations_reveal_on_scroll %}
               data-cascade
             {% endif %}
@@ -84,32 +84,6 @@
                     {% render block %}
                   {%- when 'text' -%}
                     <div class="footer-block__details-content rte">
-                      <div class="footer__payment-icons">
-                        <div class="payment-icon-wrapper full">
-                          <img src="{{ 'icon-cash.svg' | asset_url }}" alt="Cash on Delivery" class="payment-icon">
-                          <span>Cash on Delivery</span>
-                        </div>
-
-                        <div class="payment-icon-wrapper full">
-                          <img src="{{ 'icon-calender.svg' | asset_url }}" alt="Installment" class="payment-icon">
-                          <span>Buy with Installment</span>
-                        </div>
-
-                        <div class="payment-icon-wrapper">
-                          <img src="{{ 'icon-visa.svg' | asset_url }}" alt="Visa" class="payment-icon">
-                        </div>
-                        <div class="payment-icon-wrapper">
-                          <img src="{{ 'icon-mastercard.svg' | asset_url }}" alt="Visa" class="payment-icon">
-                        </div>
-                        <div class="payment-icon-wrapper">
-                          <img src="{{ 'icon-paypal.svg' | asset_url }}" alt="PayPal" class="payment-icon">
-                        </div>
-                        <div class="payment-icon-wrapper">
-                          <img src="{{ 'icon-venmo.svg' | asset_url }}" alt="Venmo" class="payment-icon">
-                        </div>
-                      </div>
-                    </div>
-
                       {{ block.settings.subtext }}
                     </div>
                   {%- when 'link_list' -%}
@@ -119,9 +93,9 @@
                           <li>
                             <a
                               href="{{ link.url }}"
-                              class="link link-featured link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
                             >
-                              <span>></span> {{ link.title | escape }}
+                              {{ link.title | escape }}
                             </a>
                           </li>
                         {%- endfor -%}
@@ -129,33 +103,10 @@
                     {%- endif -%}
                   {%- when 'brand_information' -%}
                     <div class="footer-block__brand-info">
-                      <div>
-                        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset shop-name">
-                          {%- if settings.logo != blank -%}
-                            <div class="header__heading-logo-wrapper">
-                              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                              {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-                              {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                              {{
-                                settings.logo | image_url: width: 600 | image_tag: class: 'header__heading-logo motion-reduce', widths: widths, height: logo_height, width: settings.logo_width, alt: logo_alt, sizes: sizes, preload: true
-                              }}
-                            </div>
-                          {%- else -%}
-                            <span class="h2">{{ shop.name }}</span>
-                          {%- endif -%}
-                        </a>
-                      </div>
-                      <div class="brand-address">
-                        <h4>Corporate Address</h4>
-                        <p>{{ settings.corporate_address }}</p>
-                        <p>Phone: +880 1234 567890</p>
-                      </div>
-                      <p class="brand-address-connect">Connect with Us</p>
                       {%- if settings.brand_image != blank -%}
                         {%- assign brand_image_height = settings.brand_image_width
                           | divided_by: settings.brand_image.aspect_ratio
-                        -%}                       
+                        -%}
                         <div
                           class="footer-block__image-wrapper"
                           style="max-width: min(100%, {{ settings.brand_image_width }}px);"
@@ -165,7 +116,7 @@
                             | image_url: width: 1100
                             | image_tag:
                               loading: 'lazy',
-                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1500',
+                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
                               height: brand_image_height,
                               width: settings.brand_image_width
                           }}
@@ -208,35 +159,26 @@
           </div>
         {%- endif -%}
 
-        <div class="footer__custom-button-wrapper">
-          <a href="/collections/all" class="footer__custom-button"><img src="{{ 'icon-map-pin.svg' | asset_url }}" alt="Visa" class="payment-icon"><span>Store & Servise Location </span></a>
-        </div>
-
-        {% comment %} <div
-          class="footer-block--newsletter footer-block--newsletter-featured{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        <div
+          class="border-red footer-block--newsletter footer-block--newsletter-featured{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
           {% endif %}
         >
-          <div class="newsletter-heading">
-            <h2>Newsletter</h2>
-            <p>Connect With Us</p>
-          </div>
           {%- if section.settings.newsletter_enable -%}
             <div class="footer-block__newsletter">
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%} 
+              {%- if section.settings.newsletter_heading != blank -%}
+                <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+              {%- endif -%}
+              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
-                <div class="">
-                  {%- if section.settings.newsletter_heading != blank -%}
-                    <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
-                    <p>{{section.settings.newsletter_paragrap}}</p>
-                  {%- endif -%}
+                <div class="newsletter-form__field-wrapper">
                   <div class="field">
                     <input
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
                       name="contact[email]"
-                      class="field__input-featured"
+                      class="field__input"
                       value="{{ form.email }}"
                       aria-required="true"
                       autocorrect="off"
@@ -249,7 +191,7 @@
                       {% elsif form.posted_successfully? %}
                         aria-describedby="ContactFooter-success"
                       {% endif %}
-                      placeholder="Enter Your Email"
+                      placeholder="{{ 'newsletter.label' | t }}"
                       required
                     >
                     <label class="field__label" for="NewsletterForm--{{ section.id }}">
@@ -263,7 +205,7 @@
                       aria-label="{{ 'newsletter.button_label' | t }}"
                     >
                       <span class="svg-wrapper">
-                        Subscribe
+                        {{- 'icon-arrow.svg' | inline_asset_content -}}
                       </span>
                     </button>
                   </div>
@@ -299,8 +241,12 @@
               {{ shop | login_button: action: 'follow' }}
             </div>
           {%- endif -%}
-        </div> {% endcomment %}
-      </div> 
+
+          {%- if section.settings.show_social and has_social_icons -%}
+            {%- render 'social-icons', class: 'footer__list-social' -%}
+          {%- endif -%}
+        </div>
+      </div>
     {%- endunless -%}
   {%- endif -%}
 
@@ -348,6 +294,27 @@
               {%- endfor -%}
             </ul>
           </div>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
+      <div class="footer__copyright caption">
+        <small class="copyright__content"
+          >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
+        </small>
+        <small class="copyright__content">{{ powered_by_link }}</small>
+        {%- if section.settings.show_policy -%}
+          <ul class="policies list-unstyled">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <small class="copyright__content"
+                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
+                  >
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
         {%- endif -%}
       </div>
     </div>
@@ -464,12 +431,6 @@
       "default": "scheme-1"
     },
     {
-      "type": "text",
-      "id": "corporate_address",
-      "default": "123 Main Street, Dhaka, Bangladesh",
-      "label": "Corporate address"
-    },
-    {
       "type": "header",
       "content": "t:sections.footer.settings.header__1.content",
       "info": "t:sections.footer.settings.header__1.info"
@@ -485,12 +446,6 @@
       "id": "newsletter_heading",
       "default": "t:sections.footer.settings.newsletter_heading.default",
       "label": "t:sections.footer.settings.newsletter_heading.label"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "newsletter_paragrap",
-      "default": "Subscribe our newsletter for get notification about information discount",
-      "label": "Newsletter Heading"
     },
     {
       "type": "header",
@@ -576,15 +531,18 @@
       "default": 36
     }
   ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      },
-      {
-        "type": "text"
-      }
-    ]
-  }
+  "presets": [
+    {
+      "name": "t:sections.footer.name",
+      "blocks": [
+        {
+          "type": "link_list"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
