@@ -14,10 +14,18 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "brand_information_AzGPid": {
-          "type": "brand_information",
+        "text_WWCHRY": {
+          "type": "text",
           "settings": {
-            "show_social": true
+            "heading": "Heading",
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
+          }
+        },
+        "link_list_NP4HxJ": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
           }
         },
         "link_list_mb36tY": {
@@ -33,27 +41,18 @@
             "heading": "Help Service",
             "menu": "footer"
           }
-        },
-        "text_93pxqK": {
-          "type": "text",
-          "settings": {
-            "heading": "Payment Methods",
-            "subtext": ""
-          }
         }
       },
       "block_order": [
-        "brand_information_AzGPid",
+        "text_WWCHRY",
+        "link_list_NP4HxJ",
         "link_list_mb36tY",
-        "link_list_EantmG",
-        "text_93pxqK"
+        "link_list_EantmG"
       ],
       "settings": {
         "color_scheme": "scheme-4",
-        "corporate_address": "123 Main Street, Dhaka, Bangladesh",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
-        "newsletter_paragrap": "Subscribe our newsletter for get notification about information discount",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,
