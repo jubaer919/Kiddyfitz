@@ -60,6 +60,51 @@
               assign footer_grid_class = 'grid--3-col-tablet'
             endif
           -%}
+          <div class="footer-block__details-content rte border-red">
+            <div class="payment-icon-container">
+              <div class="payment-icon-div payment-icon-full-width">
+                <img 
+                  src="{{ 'icon-cash.svg' | asset_url }}" 
+                  alt="Cash Icon"
+                  width="24"
+                  height="24"
+                >
+              </div>
+              <div class="payment-icon-div payment-icon-full-width">
+                <img 
+                  src="{{ 'icon-mastercard.svg' | asset_url }}" 
+                  alt="MasterCard Icon"
+                  width="24"
+                  height="24"
+                >
+              </div>
+              <div class="payment-icon-div">
+                <img 
+                  src="{{ 'icon-paypal.svg' | asset_url }}" 
+                  alt="Paypal Icon"
+                  width="24"
+                  height="24"
+                >
+              </div>
+              <div class="payment-icon-div">
+                <img 
+                  src="{{ 'icon-venmo.svg' | asset_url }}" 
+                  alt="Venmo Icon"
+                  width="24"
+                  height="24"
+                >
+              </div>
+              <div class="payment-icon-div">
+                <img 
+                  src="{{ 'icon-visa.svg' | asset_url }}" 
+                  alt="Visa Icon"
+                  width="24"
+                  height="24"
+                >
+              </div>
+            </div>
+          </div>
+
           <div
             class="border-red footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {% if settings.animations_reveal_on_scroll %}
@@ -83,12 +128,53 @@
                   {%- when '@app' -%}
                     {% render block %}
                   {%- when 'text' -%}
-                    <div class="footer-block__details-content rte">
-                      {{ block.settings.subtext }}
-                    </div>
+                    {% comment %} <div class="footer-block__details-content rte">
+                      <div class="payment-icon-container">
+                        <div class="payment-icon-div payment-icon-full-width">
+                          <img 
+                            src="{{ 'icon-cash.svg' | asset_url }}" 
+                            alt="Cash Icon"
+                            width="24"
+                            height="24"
+                          >
+                        </div>
+                        <div class="payment-icon-div payment-icon-full-width">
+                          <img 
+                            src="{{ 'icon-mastercard.svg' | asset_url }}" 
+                            alt="MasterCard Icon"
+                            width="24"
+                            height="24"
+                          >
+                        </div>
+                        <div class="payment-icon-div">
+                          <img 
+                            src="{{ 'icon-paypal.svg' | asset_url }}" 
+                            alt="Paypal Icon"
+                            width="24"
+                            height="24"
+                          >
+                        </div>
+                        <div class="payment-icon-div">
+                          <img 
+                            src="{{ 'icon-venmo.svg' | asset_url }}" 
+                            alt="Venmo Icon"
+                            width="24"
+                            height="24"
+                          >
+                        </div>
+                        <div class="payment-icon-div">
+                          <img 
+                            src="{{ 'icon-visa.svg' | asset_url }}" 
+                            alt="Visa Icon"
+                            width="24"
+                            height="24"
+                          >
+                        </div>
+                      </div>
+                    </div> {% endcomment %}
                   {%- when 'link_list' -%}
                     {%- if block.settings.menu != blank -%}
-                      <ul class="footer-block__details-content list-unstyled">
+                      <ul class="footer-block__details-content list-unstyled footer-block__list-menu-featured">
                         {%- for link in block.settings.menu.links -%}
                           <li>
                             <a
