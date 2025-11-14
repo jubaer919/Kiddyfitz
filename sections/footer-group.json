@@ -14,13 +14,6 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "text_WWCHRY": {
-          "type": "text",
-          "settings": {
-            "heading": "Payment Methods",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
-          }
-        },
         "link_list_NP4HxJ": {
           "type": "link_list",
           "settings": {
@@ -44,7 +37,6 @@
         }
       },
       "block_order": [
-        "text_WWCHRY",
         "link_list_NP4HxJ",
         "link_list_mb36tY",
         "link_list_EantmG"
