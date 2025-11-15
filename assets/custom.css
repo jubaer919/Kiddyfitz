@@ -881,6 +881,80 @@
   gap: 2rem;
 }
 
+.footer-block__details-icons-featured {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+/* Remove all borders and outlines from newsletter form fields */
+.newsletter-form__field-wrapper,
+.newsletter-form__field-wrapper .field,
+.newsletter-form__field-wrapper .field__input,
+.newsletter-form__field-wrapper .field:hover,
+.newsletter-form__field-wrapper .field:focus,
+.newsletter-form__field-wrapper .field:focus-visible,
+.newsletter-form__field-wrapper .field__input:hover,
+.newsletter-form__field-wrapper .field__input:focus,
+.newsletter-form__field-wrapper .field__input:focus-visible {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Hide pseudo-elements that create visual borders */
+.newsletter-form__field-wrapper .field:before,
+.newsletter-form__field-wrapper .field:after,
+.newsletter-form__field-wrapper .field__input:before,
+.newsletter-form__field-wrapper .field__input:after {
+  display: none !important;
+}
+
+.field__input,
+.field__input:focus {
+  background-color: white;
+  border-radius: 5px;
+  caret-color: black;
+}
+
+/* Newsletter input placeholder color */
+.newsletter-form__field-wrapper .field__input::placeholder,
+.field__label {
+  color: black;
+}
+
+/* Newsletter error message color */
+.newsletter-form__message {
+  color: black !important;
+}
+
+.newsletter-description {
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+.newsletter-description a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.newsletter-description a:hover {
+  color: #2073f0;
+  text-decoration: none;
+}
+
+/* Newsletter button icon color */
+.newsletter-form__button .svg-wrapper svg {
+  fill: black !important;
+  color: black !important;
+}
+
+.payment-methods-heading h2 {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0;
+  margin: 0 0 3rem 0;
+}
+
 .footer__blocks-wrapper {
   flex: 0 0 40%;
   max-width: 40%;
@@ -934,6 +1008,37 @@
 .payment-icon-full-width {
   grid-column: 1 / -1;
   justify-content: center;
+}
+
+.footer__content-bottom {
+  padding: 0 !important;
+}
+
+.footer__copyright caption {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.footer__copyright-featured {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__policies-list {
+  display: flex;
+  gap: 1.5rem !important;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer__policies-list li {
+  margin-left: 1.5rem !important;
+}
+
+.footer__policies-list li::before {
+  display: none !important;
 }
 
 /* Responsive tweak for mobile */
