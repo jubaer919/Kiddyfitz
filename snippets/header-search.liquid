@@ -26,7 +26,7 @@
         </span>
       </summary>
       <div
-        class="search-modal modal__content gradient"
+        class="search-modal modal__content gradient border-red"
         role="dialog"
         aria-modal="true"
         aria-label="{{ 'general.search.search' | t }}"
@@ -81,7 +81,7 @@
               <input type="hidden" name="options[prefix]" value="last">
               <button
                 type="reset"
-                class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+                class="border-red reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
                 aria-label="{{ 'general.search.reset' | t }}"
               >
                 <span class="svg-wrapper">
@@ -95,6 +95,44 @@
               </button>
             </div>
           </form>
+
+          <style>
+            /* Mobile: Position buttons inside search input */
+            @media screen and (max-width: 749px) {
+              .search-modal__form .search {
+                position: relative;
+              }
+
+              .search-modal__form .search > div {
+                position: relative;
+                display: flex;
+                align-items: center;
+              }
+
+              .search-modal__form .search__input {
+                padding-right: 100px; /* Make room for buttons */
+              }
+
+              .search-modal__form .field__button {
+                position: absolute;
+                right: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+
+              .search-modal__form .reset__button {
+                right: 50px; /* Position reset button to the left of search button */
+              }
+
+              .search-modal__form .search__button {
+                right: 10px; /* Position search button on the far right */
+              }
+            }
+          </style>
           
           {%- if settings.predictive_search_enabled -%}
             <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>

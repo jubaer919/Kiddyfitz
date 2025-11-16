@@ -769,6 +769,37 @@
 }
 
 @media (max-width: 425px) {
+  .search-icon-modify,
+  .search-icon-modify:active {
+    width: 35px;
+    background-color: transparent;
+  }
+
+  .header__icon-burger {
+    margin-left: 1rem;
+  }
+
+  .search-modal__content a {
+    display: none;
+  }
+
+  .search__close-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.2s ease;
+  }
+
+  .search__close-btn:active {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+
   .badge-container {
     flex-direction: column;
     text-align: center;

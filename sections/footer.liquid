@@ -60,7 +60,7 @@
               assign footer_grid_class = 'grid--3-col-tablet'
             endif
           -%}
-          <div class="footer-block__details-content rte footer-block__details-icons-featured">
+          <div class="footer-block__details-icons-featured">
             <div class="payment-methods-heading">
               <h2>Payment Methods</h2>
             </div>
@@ -338,6 +338,32 @@
     </div>
   </div>
 </footer>
+
+<style>
+  @media screen and (max-width: 749px) {
+    .footer__blocks-wrapper {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    .footer-block__details-icons-featured {
+      padding-top: 1.5rem;
+      width: 70% !important;
+      margin: 0 auto;
+      flex: 0 0 70% !important;
+      max-width: 70% !important;
+    }
+
+    .footer__copyright-featured {
+      width: 70% !important;
+      margin: 0 auto;
+      gap: 1rem;
+      flex-direction: column;
+      flex: 0 0 70% !important;
+      max-width: 70% !important;
+    }
+  }
+</style>
 
 {% schema %}
 {

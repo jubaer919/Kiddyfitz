@@ -219,6 +219,59 @@
   </div>
 </div>
 
+<style>
+  /* Force 1 column on mobile for this section (handles both grid and slider cases) */
+  @media screen and (max-width: 749px) {
+    /* Ensure the container uses grid and only one column */
+    #shopify-section-{{ section.id }} .product-grid
+    , #shopify-section-{{ section.id }}
+    .product-grid.grid
+    , #shopify-section-{{ section.id }}
+    .product-grid[class*="grid--"] {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      grid-auto-columns: 1fr !important;
+      gap: 2rem !important;
+    }
+
+    /* If theme converted the list into a slider, force each slide to be full width */
+    #shopify-section-{{ section.id }} .slider__slide {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: 0 0 100% !important;
+    }
+
+    /* Defensive: also target peek/slider classes */
+    #shopify-section-{{ section.id }} .slider--tablet .product-grid
+    , #shopify-section-{{ section.id }}
+    .product-grid.slider--tablet
+    , #shopify-section-{{ section.id }}
+    .product-grid.grid--2-col-tablet-down {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Center a single column in the middle and limit card width so it doesn't stretch */
+    #shopify-section-{{ section.id }} .product-grid {
+      justify-items: center !important;
+    }
+
+    /* Constrain each item so the single column appears centered on larger mobile widths */
+    #shopify-section-{{ section.id }} .product-grid .grid__item {
+      width: 100% !important;
+      max-width: 70% !important;
+    }
+
+    /* If converted to a slider, center each slide's content */
+    #shopify-section-{{ section.id }} .slider__slide {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: 0 0 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+</style>
+
 <script>
   document.querySelectorAll('.collection-tab-btn').forEach((btn) => {
   btn.addEventListener('click', function() {
